@@ -1,0 +1,26 @@
+Kurs Apache Kafka:
+  harmonogram:
+    dzień 1:
+        temat: administracja platformy Apache Kafka
+      harmonogram:
+        - architektura i komponenty platformy
+        - Zookeeper możliwości konfiguracji
+        - administracja klastra Kafka
+    dzień 2:
+      temat: aplikacje klienckie z wykorzystaniem dostępnych API
+      harmonogram:
+        - consumer API i metody optymalizacji
+        - producer API i metody optymalizacji
+        - KStream API
+    dzień 3:
+      temat: bezpieczeństwo w Apache Kafka
+      harmonogram:
+        - Szyfrowanie SSL
+        - Metody uwierzytelniania SASL Kerberos
+        - Autoryzacja ACL
+
+  o mnie:
+    Damian Warszawski:
+      github: https://github.com/dwarszawski
+      twitter: @dwarszawski
+      linkedin: https://www.linkedin.com/in/damian-warszawski-ab5b5830/

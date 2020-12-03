@@ -1,0 +1,5 @@
+FROM confluentinc/cp-kafka:5.5.0
+
+COPY ssl/kafka.client.keystore.jks /tmp/kafka.client.keystore.jks
+COPY tmp/kafka.server.truststore.jks /tmp/kafka.client.truststore.jks
+COPY 3-2-setup-client-ssl.properties /tmp/client-ssl.properties
