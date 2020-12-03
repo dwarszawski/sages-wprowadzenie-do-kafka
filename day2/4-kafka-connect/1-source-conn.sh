@@ -58,7 +58,7 @@ docker run --rm -it -p 8000:8000 \
            landoop/kafka-connect-ui
 
 # generate template kafka-connector template
-https://github.com/jcustenborder/kafka-connect-archtype
+# https://github.com/jcustenborder/kafka-connect-archtype
 
 
 # register a new connector
