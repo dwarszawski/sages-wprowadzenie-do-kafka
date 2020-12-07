@@ -17,7 +17,11 @@ public class ItemProducer {
 
     @GetMapping("/topic/{topic}/{event}")
     public void produce(@PathVariable("topic") final String topic, @PathVariable("event") final String item){
-        kafkaTemplate.send(topic, new Item(item, "", 1.23f));
+        try {
+            kafkaTemplate.send(topic, new Item(item, "aaa", 1.23f));
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
 
         System.out.println("produced" + item);
     }

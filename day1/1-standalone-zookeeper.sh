@@ -9,6 +9,9 @@ netstat -nltp | grep 32181
 # sudo sysctl vm.swappiness=1
 # echo 'vm.swappiness=1' | sudo tee --append /etc/sysctl.conf
 
+# exec bash on container
+docker exec -it zookeeper  /bin/bash
+
 # zookeeper config
 cat /etc/kafka/zookeeper.properties
 

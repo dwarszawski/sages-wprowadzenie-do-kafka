@@ -1,7 +1,7 @@
 # consume messages from topic
 kafka-console-consumer --bootstrap-server localhost:9092 --topic first-topic
 
-# consume messages from beginning of topic
+# consume messages from beginning of topic (if no offset is registered)
 # order of messages is not total, order is per partiton
 kafka-console-consumer --bootstrap-server localhost:9092 --topic streams-plaintext-input --from-beginning
 
