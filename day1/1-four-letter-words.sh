@@ -16,7 +16,7 @@ echo "envi" | nc localhost 2181
 echo "ruok" | nc localhost 2181
 
 # wyświetl detale serwera
-echo "srvr" | nc localhost 2181
+echo "srvr" | nc localhost 32181
 
 # statystki serwera i połączeń
 echo "stat" | nc localhost 2181

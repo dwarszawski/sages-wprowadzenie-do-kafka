@@ -22,7 +22,9 @@ zookeeper-server-stop
 nc -vz localhost 32181
 
 # with whitelisting four letter commands
-docker run -d --net=host --name=zookeeper2  -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000  -e ZOOKEEPER_SYNC_LIMIT=2  -e KAFKA_OPTS="-Dzookeeper.4lw.commands.whitelist=*"   confluentinc/cp-zookeeper:latest
+docker run -d  --name=zookeeper2  -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000  -e ZOOKEEPER_SYNC_LIMIT=2 \
+  -e KAFKA_OPTS="-Dzookeeper.4lw.commands.whitelist=*" \
+  -p 32181:32181   confluentinc/cp-zookeeper:latest
 
 # healthcheck with zookeeper command
 echo "ruok" | nc localhost 32181 ; echo
