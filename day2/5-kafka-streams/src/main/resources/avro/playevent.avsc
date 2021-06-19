@@ -1,8 +1,0 @@
-{"namespace": "pl.kafka.sages",
- "type": "record",
- "name": "PlayEvent",
- "fields": [
-     {"name": "song_id",   "type": "long"},
-     {"name": "duration", "type": "long"}
- ]
-}

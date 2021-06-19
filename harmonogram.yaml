@@ -1,17 +1,43 @@
 Kurs Apache Kafka:
   harmonogram:
     dzień 1:
-        temat: administracja platformy Apache Kafka
       harmonogram:
-        - architektura i komponenty platformy
-        - Zookeeper możliwości konfiguracji
-        - administracja klastra Kafka
+        wprowadzenie do ekosystemu kafka:
+          - Przykłady wdrożeń
+          - Ewolucja modeli komunikacji
+          - Przegląd najważniejeszych komponentów platformy
+        konfiguracja w systemach rozproszonych:
+          - Rola koordynatora Apache Zookeeper w kontekście klastra Apache Kafka
+          - Architektura klastra Apache Zookeeper
+          - Drzewiasta struktura metadanych
+        administracja platformy Apache Kafka:
+          - Przykłady i zastosowania
+          - Architektura oraz możliwości konfiguracji klastra serwerów
+          - Konfiguracja parametrów brokera
+        model danych:
+          - Komunikacja klient-serwer
+          - Organizacja danych w ramach klastra serwerów
+        producer/consumer API:
+          - Podstawowe założenia i terminologia
+          - Semantyka dostarczenia komunikatów
+        Apache Kafka vs Rabbit MQ:
+          -
     dzień 2:
-      temat: aplikacje klienckie z wykorzystaniem dostępnych API
       harmonogram:
-        - consumer API i metody optymalizacji
-        - producer API i metody optymalizacji
-        - KStream API
+        Aplikacje klienckie z wykorzystaniem dostępnych API:
+          - Producer API i metody optymalizacji
+          - Consumer API i metody optymalizacji
+          - Aplikacje klienckie z wykorzystaniem Spring Framework
+        Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams:
+          - Batch vs Microbatch vs Stream
+          - Topologia Kafka Streams
+          - Przegląd operacji w ramach Kafka Streams DSL
+          - Przetwarzanie stanowe
+          - Semantyka “Exactly Once”
+          - Przetwarzanie w określonych oknach czasowych
+          - KStream vs KTable API
+        Integracja z systemami zewnętrznymi z użyciem Kafka Connect (Opcjonalne):
+          -
     dzień 3:
       temat: bezpieczeństwo w Apache Kafka
       harmonogram:

@@ -1,0 +1,1 @@
+spring:  kafka:    consumer:      group-id: default-spring-consumer      auto-offset-reset: earliest      enable-auto-commit: true      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

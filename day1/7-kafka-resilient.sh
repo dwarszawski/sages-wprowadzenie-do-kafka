@@ -2,7 +2,7 @@
 
 # create a topic with replication factor of 3
 docker run \
-  --network totalizator \
+  --network mynetwork \
   --rm \
   confluentinc/cp-kafka:5.0.0 \
   kafka-topics --create --topic test --partitions 3 --replication-factor 3 --if-not-exists --zookeeper zzk-2:32181
@@ -13,7 +13,7 @@ docker run \
 # start a continuous random producer
 docker run \
   -it \
-  --network totalizator \
+  --network mynetwork \
   --rm \
   confluentinc/cp-kafka:5.0.0 \
  /bin/bash
@@ -24,7 +24,7 @@ docker run \
 # start a consumer
 docker run \
  --rm \
-   --network totalizator \
+   --network mynetwork \
  confluentinc/cp-kafka:5.0.0 \
  kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic test
 
