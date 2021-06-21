@@ -5,6 +5,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+
+// Ability to rebalance consumers by changing the number of partitions
 //@Service
 public class EProducer {
 

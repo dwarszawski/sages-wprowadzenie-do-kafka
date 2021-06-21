@@ -11,6 +11,7 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 
 import java.time.Duration;
 
+// Hopping time window
 //@Configuration
 public class GTransactionStream {
 

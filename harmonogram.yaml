@@ -28,6 +28,9 @@ Kurs Apache Kafka:
           - Producer API i metody optymalizacji
           - Consumer API i metody optymalizacji
           - Aplikacje klienckie z wykorzystaniem Spring Framework
+        Integracja z systemami zewnętrznymi z użyciem Kafka Connect:
+          - Kafka Connect zastosowania
+          - Implementacja własnego connectora
         Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams:
           - Batch vs Microbatch vs Stream
           - Topologia Kafka Streams
@@ -36,8 +39,6 @@ Kurs Apache Kafka:
           - Semantyka “Exactly Once”
           - Przetwarzanie w określonych oknach czasowych
           - KStream vs KTable API
-        Integracja z systemami zewnętrznymi z użyciem Kafka Connect (Opcjonalne):
-          -
     dzień 3:
       temat: bezpieczeństwo w Apache Kafka
       harmonogram:

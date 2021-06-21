@@ -148,26 +148,3 @@ Event can be trigger by registering model version from MLflow Tracking UI:
 
 And changing the stage of the model version to `Production`:
 ![MLflow model registry](./img/change-stage.png)
-
-
-## Release
-`Maven` support releases with `maven-release-plugin`.
-Release can be generated using two-step procedure:
-
-* Prepare release (use flag `-DdryRun=true` if you want to verify it before creating release)
-
-    `mvn release:prepare -DignoreSnapshots=true   -DskipTests=true -f ./kafka-connect-mlflow/`
-    
-    two commits will be added on top of your commit and pushed to your branch:
- 
-    * prepare release kafka-connect-mlflow-${version} with proper tag
-    * prepare for next development iteration
-    
-* Tag pushed in the previous step triggers gitlab ci/cd `deploy` stage which publish your assembly to `artifactory`
-
-* Clean release files after all
-
-    `mvn release:clean -f ./kafka-connect-mlflow/`
-
-
-

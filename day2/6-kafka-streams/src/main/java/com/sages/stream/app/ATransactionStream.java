@@ -8,6 +8,8 @@ import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// Simple kafka stream
+// see config file
 @Configuration
 public class ATransactionStream {
 

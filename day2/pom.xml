@@ -25,6 +25,7 @@
         <module>2-kafka-java-advanced</module>
         <module>3-kafka-consumer-spring</module>
         <module>3-kafka-producer-spring</module>
+        <module>4-kafka-connect/kafka-connect-mlflow-main</module>
         <module>6-kafka-streams</module>
     </modules>
 
