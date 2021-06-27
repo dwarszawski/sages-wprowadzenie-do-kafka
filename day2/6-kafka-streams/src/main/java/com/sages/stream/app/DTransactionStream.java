@@ -1,7 +1,7 @@
 package com.sages.stream.app;
 
 
-import com.sages.stream.dto.CTransaction;
+import com.sages.model.Transaction;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
@@ -17,20 +17,18 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 public class DTransactionStream {
 
     @Bean
-    public KStream<String, CTransaction> dStream(StreamsBuilder builder) {
-        var stringSerde = Serdes.String();
-        var transactionSerde = new JsonSerde<>(CTransaction.class);
-        var doubleSerde = Serdes.Double();
+    public KStream<Long, Transaction> dStream(StreamsBuilder builder) {
+        var transactionSerde = new JsonSerde<>(Transaction.class);
 
-        var balanceStream = builder.stream("d_transactions", Consumed.with(stringSerde, transactionSerde));
+        var balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
 
         balanceStream
-                .selectKey((k, v) -> v.getAccountId())
-                .mapValues((k, v) -> v.getType().equalsIgnoreCase("DEBIT") ? v.getAmount() : (-1) * v.getAmount())
+                .selectKey((k, v) -> v.getId())
+                .mapValues((k, v) -> v.getDescription().equalsIgnoreCase("DEBIT") ? v.getValue() : (-1) * v.getValue())
                 .groupByKey()
                 // reduce can be used in place of aggregate as the output type is the same
-                .reduce(Double::sum, Materialized.with(stringSerde, doubleSerde))
-                .toStream().to("d_balances", Produced.with(stringSerde, doubleSerde));
+                .reduce(Double::sum, Materialized.with(Serdes.Long(), Serdes.Double()))
+                .toStream().to("balances", Produced.with(Serdes.Long(), Serdes.Double()));
 
         return balanceStream;
     }

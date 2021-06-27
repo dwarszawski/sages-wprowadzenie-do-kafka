@@ -8,20 +8,19 @@ import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
-@Service(value = "gErrorHandler")
-public class GErrorHandler implements ConsumerAwareListenerErrorHandler {
+@Service(value = "customErrorHandler")
+public class CustomErrorHandler implements ConsumerAwareListenerErrorHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(GErrorHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(CustomErrorHandler.class);
 
 	@Override
 	public Object handleError(Message<?> message, ListenerExecutionFailedException exception, Consumer<?, ?> consumer) {
-		log.warn("Handling error : {}, message : {}", message.getPayload(), exception.getMessage());
+		log.info("Handling error : {}, message : {}", message.getPayload(), exception.getMessage());
 
 		// to rethrow to global error handler
 		if (exception.getCause() instanceof RuntimeException) {
 			throw exception;
 		}
-
 		return null;
 	}
 

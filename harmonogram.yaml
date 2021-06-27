@@ -9,6 +9,7 @@ Kurs Apache Kafka:
         konfiguracja w systemach rozproszonych:
           - Rola koordynatora Apache Zookeeper w kontekście klastra Apache Kafka
           - Architektura klastra Apache Zookeeper
+          - Budowanie zgodności w oparciu o kworum większości
           - Drzewiasta struktura metadanych
         administracja platformy Apache Kafka:
           - Przykłady i zastosowania

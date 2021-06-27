@@ -60,4 +60,4 @@ create /mynode "test data"
 ls /
 
 # REFERENCES
-# cluster deployment https://docs.confluent.io/5.0.0/installation/docker/docs/installation/clustered-deployment.html
+# cluster deployment https://docs.confluent.io/latest/installation/docker/docs/installation/clustered-deployment.html

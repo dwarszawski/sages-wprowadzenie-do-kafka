@@ -1,7 +1,7 @@
 version: "2"
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.5.0
+    image: confluentinc/cp-zookeeper:latest
     network_mode: "host"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -9,7 +9,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    image: confluentinc/cp-kafka:5.5.0
+    image: confluentinc/cp-kafka:latest
     network_mode: "host"
     ports:
       - "9092:9092"
@@ -20,7 +20,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
   connect:
-    image: confluentinc/cp-kafka-connect:5.5.0
+    image: confluentinc/cp-kafka-connect:latest
     container_name: connect
     network_mode: "host"
     ports:

@@ -3,26 +3,30 @@ package com.sages.stream.dto;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.sages.model.Transaction;
 
 // Ability to customize the serde with jackson annotations
-public class BTransaction {
+public class EnrichedTransaction {
 
     @JsonProperty("transaction_id")
     private String id;
 
+    @JsonProperty("amount")
     private Double value;
 
-    @JsonProperty("object_date")
+    @JsonProperty("transaction_date")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime timestamp;
 
-    private String type;
-
-    public BTransaction(ATransaction transaction, String type) {
-        super();
-        this.id = transaction.getId();
-        this.value = transaction.getValue();
-        this.timestamp = transaction.getTimestamp();
-        this.type = type;
+    public EnrichedTransaction(String id, Double value, LocalDateTime timestamp) {
+        this.id = id;
+        this.value = value;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -47,13 +51,5 @@ public class BTransaction {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

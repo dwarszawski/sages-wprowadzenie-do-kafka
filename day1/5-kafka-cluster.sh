@@ -60,7 +60,7 @@ docker run -d \
     -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
     -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:29092 \
     -e KAFKA_MIN_INSYNC_REPLICAS=2 \
-    confluentinc/cp-kafka:5.0.0
+    confluentinc/cp-kafka:latest
 
 docker run -d \
     --name=kafka-2 \
@@ -69,7 +69,8 @@ docker run -d \
     -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
     -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:39092 \
     -e KAFKA_MIN_INSYNC_REPLICAS=2 \
-    confluentinc/cp-kafka:5.0.0
+    confluentinc/cp-kafka:latest
+
 
  docker run -d \
      --name=kafka-3 \
@@ -78,7 +79,7 @@ docker run -d \
      -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
      -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:49092 \
      -e KAFKA_MIN_INSYNC_REPLICAS=2 \
-     confluentinc/cp-kafka:5.0.0
+     confluentinc/cp-kafka:latest
 
 # sprawdź logi kontenerów
 docker ps
@@ -90,31 +91,31 @@ docker logs kafka-3 | grep started
 docker run \
   --rm \
   --network mynetwork \
-  confluentinc/cp-kafka:5.0.0 \
+  confluentinc/cp-kafka:latest \
   kafka-topics --create --topic foobar --partitions 3 --replication-factor 3 --if-not-exists --zookeeper zzk-2:32181
 
 # wyświetl szczegóły utworzonego "topicu"
 docker run \
     --network mynetwork \
     --rm \
-    confluentinc/cp-kafka:5.0.0 \
+    confluentinc/cp-kafka:latest \
     kafka-topics --describe --topic foobar --zookeeper zzk-2:32181
 
 
 # wyślij wiadomości na kolejkę
 docker run \
   --network mynetwork \
-  --rm confluentinc/cp-kafka:5.0.0 \
+  --rm confluentinc/cp-kafka:latest \
   bash -c "seq 42 | kafka-console-producer --broker-list kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic foobar && echo 'Produced 42 messages.'"
 
 # uruchom konsumenta dla kolejki
 docker run \
   --network mynetwork \
  --rm \
- confluentinc/cp-kafka:5.0.0 \
+ confluentinc/cp-kafka:latest \
  kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic foobar --from-beginning --max-messages 42
 
 # TODO: check the zookeeper navigator
 
 # REFERENCES
-# https://docs.confluent.io/5.0.0/installation/docker/docs/installation/clustered-deployment.html
+# https://docs.confluent.io/latest/installation/docker/docs/installation/clustered-deployment.html

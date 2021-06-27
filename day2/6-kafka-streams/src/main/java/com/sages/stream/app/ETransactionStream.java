@@ -1,6 +1,6 @@
 package com.sages.stream.app;
 
-import com.sages.stream.dto.CTransaction;
+import com.sages.model.Transaction;
 import com.sages.stream.extractors.RecordTimestampExtractor;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -16,16 +16,15 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 public class ETransactionStream {
 
     @Bean
-    public KStream<String, CTransaction> eStream(StreamsBuilder builder) {
-        var stringSerde = Serdes.String();
-        var jsonSerde = new JsonSerde<>(CTransaction.class);
+    public KStream<Long, Transaction> eStream(StreamsBuilder builder) {
+        var jsonSerde = new JsonSerde<>(Transaction.class);
         var timestampExtractor = new RecordTimestampExtractor();
 
         // null for reset policy (auto offset reset) - to enforce default configuration
-        var transactions = builder.stream("e_transactions",
-                Consumed.with(stringSerde, jsonSerde, timestampExtractor, null));
+        var transactions = builder.stream("transactions",
+                Consumed.with(Serdes.Long(), jsonSerde, timestampExtractor, null));
 
-        transactions.to("e_transactions_timestamp", Produced.with(stringSerde, jsonSerde));
+        transactions.to("transactions_timestamp", Produced.with(Serdes.Long(), jsonSerde));
         // check if produce same value as given in the message payload
         return transactions;
     }

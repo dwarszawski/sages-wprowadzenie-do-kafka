@@ -1,5 +1,6 @@
 package com.sages.producer.config;
 
+import com.sages.model.Transaction;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -12,22 +13,20 @@ import org.springframework.kafka.core.ProducerFactory;
 @Configuration
 public class KafkaConfig {
 
-	@Autowired
-	private KafkaProperties kafkaProperties;
+    @Autowired
+    private KafkaProperties kafkaProperties;
 
-	@Bean
-	public KafkaTemplate<String, String> kafkaTemplate() {
-		return new KafkaTemplate<>(producerFactory());
-	}
+    @Bean
+    public KafkaTemplate<Long, Transaction> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
 
-	// kafka engine for producer
-	// changing the rebalancing timeout
-	@Bean
-	public ProducerFactory<String, String> producerFactory() {
-		var properties = kafkaProperties.buildProducerProperties();
-		properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, "180000");
+    @Bean
+    public ProducerFactory<Long, Transaction> producerFactory() {
+        var properties = kafkaProperties.buildProducerProperties();
+        properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, "180000");
 
-		return new DefaultKafkaProducerFactory<>(properties);
-	}
+        return new DefaultKafkaProducerFactory<>(properties);
+    }
 
 }

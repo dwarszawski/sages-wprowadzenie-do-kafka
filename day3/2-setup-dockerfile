@@ -1,4 +1,4 @@
-FROM confluentinc/cp-kafka:5.5.0
+FROM confluentinc/cp-kafka:latest
 
 COPY tmp/kafka.server.keystore.jks /etc/kafka/secrets/ssl/kafka.server.keystore.jks
 COPY tmp/kafka.server.truststore.jks /etc/kafka/secrets/ssl/kafka.server.truststore.jks
