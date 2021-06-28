@@ -32,7 +32,7 @@ public class Scheduler {
         producer.send(first);
         producer.send(second);
         producer.send(third);
-        producer.send(invalid);
+        //producer.send(invalid);
 
         log.info("Done");
     }

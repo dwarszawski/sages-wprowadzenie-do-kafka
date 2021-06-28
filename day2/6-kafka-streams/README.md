@@ -24,4 +24,23 @@ docker ps | grep zookeeper
             -e KAFKA_MIN_INSYNC_REPLICAS=1 \
             confluentinc/cp-kafka:latest
 
+# create topics scripts
+
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic transactions
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic enriched_transactions
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic balances
+
+kafka-console-consumer --bootstrap-server localhost:29092 --topic balances --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.DoubleDeserializer"
+kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_timestamp --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
+
+
+
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic transactions_groups
+
+ key       window start  window end       value
+[708877241@1624914000000/1624917600000], -2000.0
+
+
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic transactions_hop_groups
+
 ```

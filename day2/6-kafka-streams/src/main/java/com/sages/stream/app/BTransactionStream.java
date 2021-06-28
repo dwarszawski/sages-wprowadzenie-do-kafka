@@ -27,7 +27,7 @@ public class BTransactionStream {
                 Consumed.with(Serdes.Long(), transactionJsonSerde));
         KStream<Long, EnrichedTransaction> enrichedStream = sourceStream.mapValues(this::enrichTransaction);
 
-        enrichedStream.to("b_enriched_transactions", Produced.with(Serdes.Long(), enrichedTransactionJsonSerde));
+        enrichedStream.to("enriched_transactions", Produced.with(Serdes.Long(), enrichedTransactionJsonSerde));
 
         sourceStream.print(Printed.<Long, Transaction>toSysOut().withLabel("Transaction stream"));
         enrichedStream.print(Printed.<Long, EnrichedTransaction>toSysOut().withLabel("Enriched transaction stream"));
