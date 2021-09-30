@@ -1,0 +1,16 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema",
+  "name": "CustomFixedType",
+  "doc": "Custom Fixed Type",
+  "fields": [
+    {
+      "name": "md5",
+      "type": {
+        "name": "MD5",
+        "type": "fixed",
+        "size": 32
+      }
+    }
+  ]
+}

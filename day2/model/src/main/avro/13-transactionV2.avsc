@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema.evolution.full",
+  "name": "TransactionV2",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "long"
+    },
+    {
+      "name": "transactionValue",
+      "type": "double"
+    },
+    {
+      "name": "swiftCode",
+      "type": "string",
+      "default": "SVRNUS33XXX"
+    }
+  ]
+}

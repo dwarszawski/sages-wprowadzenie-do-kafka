@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema",
+  "name": "Transaction3",
+  "doc": "Bank Transaction (union type)",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "string"
+    },
+    {
+      "name": "transactionDescription",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "currency",
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": "USD"
+    }
+  ]
+}

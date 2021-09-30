@@ -1,0 +1,29 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema",
+  "name": "Transaction1",
+  "doc": "Bank Transaction (primitive types with default values)",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "value",
+      "type": "double",
+      "default": "0.0"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "date",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

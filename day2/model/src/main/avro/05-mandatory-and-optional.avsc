@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema",
+  "name": "BankAccount1",
+  "doc": "Bank Account (arrays)",
+  "fields": [
+    {
+      "name": "subAccounts",
+      "doc": "associated sub accounts",
+      "type": {
+        "type": "array",
+        "items": "string"
+      }
+    },
+    {
+      "name": "tags",
+      "doc": "optional tags",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "string"
+        }
+      ],
+      "default": null
+    }
+  ]
+}

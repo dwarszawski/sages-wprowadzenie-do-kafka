@@ -1,0 +1,32 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema",
+  "name": "Currencies",
+  "doc": "Currencies (map type)",
+  "fields": [
+    {
+      "name": "currencies",
+      "doc": "currency mapping",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "default": {
+        "USD": "United State Dollars",
+        "PLN": "Polish Zloty"
+      }
+    },
+    {
+      "name": "swiftCodes",
+      "doc": "optional map",
+      "type": [
+        "null",
+        {
+          "type": "map",
+          "values": "int"
+        }
+      ],
+      "default": null
+    }
+  ]
+}

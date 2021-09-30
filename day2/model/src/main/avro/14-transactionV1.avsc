@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "namespace": "com.sages.schema.evolution.not.backward",
+  "name": "TransactionV1",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "long"
+    },
+    {
+      "name": "transactionValue",
+      "type": "double"
+    }
+  ]
+}

@@ -30,6 +30,13 @@
     * Filtrowanie komunikatów
     * Obsługa błędów i ponowień po stronie konsumenta
     * Strategia "Dead Letters"
+* Schemat danych
+    * Ograniczenia serializacji JSON
+    * Wsparcie dla zmiennych schematów danych
+    * Rejestr schematów
+    * Reprezentacja danych w formacie AVRO (+ avro-tool)
+    * Ewolucja schematów danych (kompatybilność wsteczna/w przód/pełna)
+    * Konfiguracja producentów i konsumentów - wykorzystanie Avro i Schema Registry
 * Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams
 	* Batch vs Microbatch vs Stream
 	* Topologia Kafka Streams
