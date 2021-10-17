@@ -1,29 +1,32 @@
+# Apache Kafka - wprowadzenie do architektury sterowanej zdarzeniami
+
 * Wprowadzenie do ekosystemu Kafka
-	* Przykłady wdrożeń
-	* Ewolucja modeli komunikacji
-	* Zastosowania systemów zorientowanych na przetwarzanie komunikatów
-	* Przegląd najważniejszych elementów platformy
+    * Przykłady wdrożeń
+    * Ewolucja modeli komunikacji
+    * Zastosowania systemów zorientowanych na przetwarzanie komunikatów
+    * Przegląd najważniejszych elementów platformy
 * Konfiguracja w systemach rozproszonych
-	* Rola koordynatora Apache Zookeeper w kontekście klastra Apache Kafka
-	* Architektura klastra Apache Zookeeper
-	* Budowanie zgodności w oparciu o kworum większości
-	* Drzewiasta struktura metadanych
+    * Rola koordynatora Apache Zookeeper w kontekście klastra Apache Kafka
+    * Architektura klastra Apache Zookeeper
+    * Budowanie zgodności w oparciu o kworum większości
+    * Drzewiasta struktura metadanych
 * Model danych
-	* Podstawowe założenia i terminologia
-	* Organizacja danych w ramach klastra Kafka
+    * Paradygmaty komunikacji asynchronicznej
+    * Podstawowe założenia i terminologia
+    * Organizacja danych w ramach klastra Kafka
 * Administracja klastra Apache Kafka
-	* Architektura oraz możliwości konfiguracji klastra serwerów
-	* Komunikacja klient-serwer
-	* Konfiguracja parametrów serwera
-	* Tolerencja awarii
+    * Architektura oraz możliwości konfiguracji klastra serwerów
+    * Komunikacja klient-serwer
+    * Konfiguracja parametrów serwera
+    * Tolerencja awarii
 * Producer/Consumer API
-	* Producer API - semantyka dostarczenia komunikatów
-	* Idempotentny Producent
-	* Consumer API - semantyka odbierania komunikatów
-	* Apache Kafka vs Rabbit MQ
+    * Producer API - semantyka dostarczenia komunikatów
+    * Idempotentny Producent
+    * Consumer API - semantyka odbierania komunikatów
+    * Apache Kafka vs Rabbit MQ
 * Aplikacje klienckie z wykorzystaniem biblioteki Kafka-Clients
-	* Konfiguracja producentów i konsumentów
-	* Kompresja komunikatów
+    * Konfiguracja producentów i konsumentów
+    * Kompresja komunikatów
 * Aplikacje klienckie z wykorzystaniem Spring Framework
     * Konfiguracja producentów i konsumentów
     * Serializacja i deserializacja komunikatów
@@ -38,13 +41,13 @@
     * Ewolucja schematów danych (kompatybilność wsteczna/w przód/pełna)
     * Konfiguracja producentów i konsumentów - wykorzystanie Avro i Schema Registry
 * Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams
-	* Batch vs Microbatch vs Stream
-	* Topologia Kafka Streams
-	* Przegląd operacji w ramach Kafka Streams DSL
-	* Przetwarzanie stanowe
-	* Semantyka "Exactly Once"
-	* Przetwarzanie w określonych oknach czasowych
-	* KStream vs KTable API
+    * Batch vs Microbatch vs Stream
+    * Topologia Kafka Streams
+    * Przegląd operacji w ramach Kafka Streams DSL
+    * Przetwarzanie stanowe
+    * Semantyka "Exactly Once"
+    * Przetwarzanie w określonych oknach czasowych
+    * KStream vs KTable API
 	
 	
 ## O mnie
@@ -57,7 +60,7 @@ Kontrybutor projektów "open source" z zakresu zarządzania i wyszukiwania danyc
 Prelegent na konferencjach Data Science Summit Warsaw, Big Data Technology Warsaw czy ING Data Engineering meetup.
 
 ### Co robię na codzień
-VP Engineer w obszarze produktów inwestycyjncyh dla "Marcus by Goldman Sachs"
+Trener
 
 
 ### Dlaczego lubię szkolić

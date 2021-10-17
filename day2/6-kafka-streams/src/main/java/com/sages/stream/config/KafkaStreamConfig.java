@@ -21,8 +21,8 @@ public class KafkaStreamConfig {
 		var props = new HashMap<String, Object>();
 
 		//mandatory configuration
-		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-stream1");
-		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "172.17.0.1:29092");
+		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "transaction_processor");
+		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
 		props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.Long().getClass().getName());
 		props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.Double().getClass().getName());

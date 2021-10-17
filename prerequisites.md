@@ -58,29 +58,10 @@ Należy zainstalować następujące komponenty:
     
     *   https://docs.docker.com/docker-for-windows/install/ 
 
-*   Docker Compose >= 1.23
-
-    Zweryfikowanie poprawności instalacji w Bash/Shell lub CMD/Powershell za pomocą następującej komendy:    
-    
-        $ docker-compose --version
-
-    Przykład wykonania:
-    
-        docker-compose version 1.23.1, build b02f1306
-
-    Przydatne linki:
-    
-    *   https://docs.docker.com/compose/install/
 
 *   IntelliJ IDEA w wersji `community`
 
     Przydatne linki:
     
     *   https://www.jetbrains.com/idea/
-
-*   openssl cli
-
-    Przydatne linki:
-    
-    * [instalacja windows](https://www.cloudinsidr.com/content/how-to-install-the-most-recent-version-of-openssl-on-windows-10-in-64-bit/) 
 

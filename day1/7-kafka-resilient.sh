@@ -7,9 +7,6 @@ docker run \
   confluentinc/cp-kafka:latest \
   kafka-topics --create --topic test --partitions 3 --replication-factor 3 --if-not-exists --zookeeper zzk-2:32181
 
-
-# generate 10KB of random data
-
 # start a continuous random producer
 docker run \
   -it \
@@ -18,8 +15,7 @@ docker run \
   confluentinc/cp-kafka:latest \
  /bin/bash
 
-#base64 /dev/urandom | head -c 10000 | egrep -ao "\w" | tr -d '\n' > file10KB.txt  && kafka-producer-perf-test --topic test --num-records 10000 --throughput 10 --payload-file file10KB.txt --producer-props acks=1 bootstrap.servers=kafka-1:29092,kafka-2:39092,kafka-3:49092 --payload-delimiter A
-
+#base64 /dev/urandom | head -c 10000 | egrep -ao "\w" | tr -d '\n' > random.txt  && kafka-producer-perf-test --topic test --num-records 10000 --throughput 10 --payload-file random.txt --producer-props acks=1 bootstrap.servers=kafka-1:29092,kafka-2:39092,kafka-3:49092 --payload-delimiter A
 
 # start a consumer
 docker run \
