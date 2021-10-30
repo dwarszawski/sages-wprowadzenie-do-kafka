@@ -37,7 +37,7 @@
     * Ograniczenia serializacji JSON
     * Wsparcie dla zmiennych schematów danych
     * Rejestr schematów
-    * Reprezentacja danych w formacie AVRO (+ avro-tool)
+    * Reprezentacja danych w formacie AVRO
     * Ewolucja schematów danych (kompatybilność wsteczna/w przód/pełna)
     * Konfiguracja producentów i konsumentów - wykorzystanie Avro i Schema Registry
 * Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams
@@ -48,8 +48,11 @@
     * Semantyka "Exactly Once"
     * Przetwarzanie w określonych oknach czasowych
     * KStream vs KTable API
-	
-	
+* Bezpieczeństwo platformy Apache Kafka
+  * szyfrowanie SSL w komunikacji klient serwer
+  * uwierzytelnienie z wykorzystaniem protokołu SASL
+  * autoryzacja z wykorzystaniem list kontroli dostępu ACL
+  
 ## O mnie
 
 ### BIO

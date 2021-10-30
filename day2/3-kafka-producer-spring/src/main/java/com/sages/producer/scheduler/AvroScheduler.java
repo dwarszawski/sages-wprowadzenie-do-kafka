@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-//@Service
+@Service
 public class AvroScheduler {
 
     private static final Logger log = LoggerFactory.getLogger(AvroScheduler.class);
@@ -20,7 +20,7 @@ public class AvroScheduler {
     @Autowired
     private AvroProducer producer;
 
-//    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000)
     public void generateTransaction() throws JsonProcessingException {
 
 

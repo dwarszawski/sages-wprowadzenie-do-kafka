@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
+//@Service
 public class Scheduler {
 
     private static final Logger log = LoggerFactory.getLogger(Scheduler.class);
