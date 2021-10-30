@@ -1,15 +1,13 @@
 package com.sages.stream.dto;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.sages.model.Transaction;
 
-// Ability to customize the serde with jackson annotations
+import java.time.LocalDateTime;
+
 public class EnrichedTransaction {
 
     @JsonProperty("transaction_id")

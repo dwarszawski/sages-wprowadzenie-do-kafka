@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-//@Service
+@Service
 public class Scheduler {
 
     private static final Logger log = LoggerFactory.getLogger(Scheduler.class);
@@ -24,15 +24,7 @@ public class Scheduler {
         Transaction first = new Transaction(generateTransactionId(), 10.00, "DEBIT", LocalDateTime.now());
         Transaction second = new Transaction(generateTransactionId(), 2000.00, "CREDIT", LocalDateTime.now());
         Transaction third = new Transaction(generateTransactionId(), 100.00 ,"DEBIT", LocalDateTime.now());
-        Transaction invalid = new Transaction(generateTransactionId(),  5.25, "invalid", LocalDateTime.now());
-
-        first.setDate(LocalDateTime.now().minusWeeks(2));
-
-
-        producer.send(first);
-        producer.send(second);
-        producer.send(third);
-        //producer.send(invalid);
+        //Transaction invalid = new Transaction(generateTransactionId(),  5.25, "invalid", LocalDateTime.now());
 
         log.info("Done");
     }

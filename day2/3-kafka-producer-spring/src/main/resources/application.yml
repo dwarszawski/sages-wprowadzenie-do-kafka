@@ -1,9 +1,0 @@
-spring:
-  kafka:
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.LongSerializer
-      #      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-      value-serializer:  io.confluent.kafka.serializers.KafkaAvroSerializer
-      bootstrap-servers: 172.17.0.1:9092
-    properties:
-      schema.registry.url: http://172.17.0.1:8081

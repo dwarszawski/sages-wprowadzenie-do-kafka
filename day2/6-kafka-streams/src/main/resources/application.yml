@@ -1,9 +1,0 @@
-spring:
-  main:
-    banner-mode: OFF
-  kafka:
-    listener:
-      missing-topics-fatal: false
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
