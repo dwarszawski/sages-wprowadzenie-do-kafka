@@ -23,6 +23,7 @@ public class AdvancedConsumer {
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("Key: " + record.key() + ", Value: " + record.value());
                 System.out.println("Partition: " + record.partition() + ", Offset:" + record.offset());
+                System.out.println("Timestamp: " + record.timestamp());
                 consumer.commitSync();
             }
         }

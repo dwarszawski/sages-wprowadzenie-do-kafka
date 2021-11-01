@@ -1,16 +1,16 @@
 package com.sages.avro;
 
-import java.io.*;
-import java.time.Instant;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
-
-import com.sages.schema.Transaction1;
+import com.sages.schema.evolution.backward.TransactionV1;
+import com.sages.schema.evolution.backward.TransactionV2;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
+
+import java.io.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class SpecificRecordBuilderApp {
 
@@ -18,40 +18,42 @@ public class SpecificRecordBuilderApp {
 
         File file = new File("day2/model/target/data.avro");
 
-
-        String filePath = "avro/01-primitive.avsc";
+        String filePath = "avro/11-transactionV1.avsc";
         final Schema schema = schema(filePath);
 
 
         write(file, schema);
-        System.out.println("");
+        System.out.println();
         read(file, schema);
     }
 
     private static void write(File toFile, Schema schema) throws IOException {
-        Transaction1 data = Transaction1.newBuilder()
-                .setId(ThreadLocalRandom.current().nextLong())
-                .setDate(Instant.now())
+        TransactionV1 data = TransactionV1.newBuilder()
+                .setTransactionId(ThreadLocalRandom.current().nextLong())
+                .setTransactionValue(1230.12)
                 .build();
 
-        SpecificDatumWriter<Transaction1> datumWriter = new SpecificDatumWriter<>(Transaction1.class);
+        SpecificDatumWriter<TransactionV1> datumWriter = new SpecificDatumWriter<>(TransactionV1.class);
 
-        DataFileWriter<Transaction1> dataWriter = new DataFileWriter<>(datumWriter);
+        DataFileWriter<TransactionV1> dataWriter = new DataFileWriter<>(datumWriter);
 
 
         dataWriter.create(data.getSchema(), toFile);
         //dataWriter.create(schema, toFile);
         dataWriter.append(data);
         System.out.println("Saved: " + data);
+        dataWriter.close();
     }
 
     private static void read(File fromFile, Schema schema) throws IOException {
-        SpecificDatumReader<Transaction1> datumReader = new SpecificDatumReader<>(Transaction1.class);
+//        SpecificDatumReader<TransactionV1> datumReader = new SpecificDatumReader<>(TransactionV1.class);
+        SpecificDatumReader<TransactionV2> datumReader = new SpecificDatumReader<>(TransactionV2.class);
 
-        DataFileReader<Transaction1> dataReader = new DataFileReader<>(fromFile, datumReader);
-
-        System.out.println("Reading");
+//        DataFileReader<TransactionV1> dataReader = new DataFileReader<>(fromFile, datumReader);
+        DataFileReader<TransactionV2> dataReader = new DataFileReader<>(fromFile, datumReader);
+        System.out.println("Reading...");
         dataReader.forEach(System.out::println);
+
     }
 
     private static Schema schema(String filePath) throws IOException {
