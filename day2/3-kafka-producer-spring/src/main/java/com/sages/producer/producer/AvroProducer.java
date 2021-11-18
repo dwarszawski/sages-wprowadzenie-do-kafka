@@ -12,7 +12,7 @@ public class AvroProducer {
     private KafkaTemplate<Long, Transaction1> kafkaTemplate;
 
     public void send(Transaction1 transaction) {
-        kafkaTemplate.send("transactions", transaction.getId(), transaction);
+        kafkaTemplate.send("avro.transactions", transaction.getId(), transaction);
     }
 
 }

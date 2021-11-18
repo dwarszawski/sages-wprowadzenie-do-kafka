@@ -22,7 +22,7 @@ public class KafkaStreamConfig {
 
 		//mandatory configuration
 		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "transaction_processor");
-		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://172.17.0.1:29092, http://172.17.0.1:39092, http://172.17.0.1:49092");
 
 		props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.Long().getClass().getName());
 		props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.Double().getClass().getName());

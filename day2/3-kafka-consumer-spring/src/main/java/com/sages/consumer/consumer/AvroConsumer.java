@@ -12,7 +12,7 @@ public class AvroConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(AvroConsumer.class);
 
-//    @KafkaListener(topics = "transactions", containerFactory = "consumerContainerFactory")
+    @KafkaListener(topics = "avro.transactions", containerFactory = "consumerContainerFactory")
     public void consume(Transaction1 transaction, Acknowledgment ack) {
 
         log.info("next transaction received");

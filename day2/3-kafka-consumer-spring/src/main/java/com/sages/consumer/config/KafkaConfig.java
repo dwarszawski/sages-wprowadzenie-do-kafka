@@ -28,7 +28,7 @@ import org.springframework.util.backoff.FixedBackOff;
 
 import java.time.LocalDateTime;
 
-@Configuration
+//@Configuration
 public class KafkaConfig {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaConfig.class);
@@ -36,7 +36,7 @@ public class KafkaConfig {
     @Autowired
     private KafkaProperties kafkaProperties;
 
-    @Bean
+    //@Bean
     public ConsumerFactory<Long, Transaction> consumerFactory() {
         var properties = kafkaProperties.buildConsumerProperties();
         //time before enforcing metadata fetch request - enable to discover new partition or brokers

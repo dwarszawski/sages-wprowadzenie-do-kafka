@@ -16,7 +16,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 
-//@Configuration
+@Configuration
 public class AvroKafkaConfig {
 
     private static final Logger log = LoggerFactory.getLogger(AvroKafkaConfig.class);
