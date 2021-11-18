@@ -2,7 +2,7 @@
 kafka-topics --bootstrap-server localhost:9092 --list
 
 # create first topic
-kafka-topics --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1 --create --topic first-topic
+kafka-topics --bootstrap-server localhost:9092 --partitions 3 --replication-factor 3 --create --topic transactions
 
 # describe created topic
 kafka-topics --bootstrap-server localhost:9092 --describe --topic first-topic

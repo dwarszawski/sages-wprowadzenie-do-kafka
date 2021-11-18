@@ -40,6 +40,10 @@
     * Reprezentacja danych w formacie AVRO
     * Ewolucja schematów danych (kompatybilność wsteczna/w przód/pełna)
     * Konfiguracja producentów i konsumentów - wykorzystanie Avro i Schema Registry
+* Integracja z systemami zewnętrznymi z użyciem Kafka Connect
+    * wprowadzenie do platformy Kafka-Connect
+    * Przykład implementacji Connector-a
+    * Przykład wdrożenia Connector-a
 * Przetwarzanie strumieniowe z wykorzystaniem biblioteki Kafka Streams
     * Batch vs Microbatch vs Stream
     * Topologia Kafka Streams
@@ -52,7 +56,7 @@
   * szyfrowanie SSL w komunikacji klient serwer
   * uwierzytelnienie z wykorzystaniem protokołu SASL
   * autoryzacja z wykorzystaniem list kontroli dostępu ACL
-  
+
 ## O mnie
 
 ### BIO
@@ -69,3 +73,9 @@ Trener
 ### Dlaczego lubię szkolić
 Szkolenia to jedna z najlepszych form dzielenia się praktycznym doświadczeniem gdzie istnieje unikalna możliwość prowadzenia aktywnej interakcji z uczestnikami.
 To nie tylko szansa na rozwój ale również konfrontacja różych punktów widzenia, merytoryczna dyskusja i praca z ludźmi na różnym etapie kariery. 
+
+### Tekst na certyfikat
+
+Szkolenie obejmowało łącznie 16 godzin wykładów oraz praktycznych ćwiczeń jako wprowadzenie do architektury sterowanej zdarzeniami z wykorzystaniem ekosystemu Apache Kafka.
+Uczestnicy nabyli umiejętność efektywnego projektowania i administrowania klastrem serwerów Apache Kafka.
+W ramach warsztatów, uczestnicy poznali podstawy powszechnie wykorzystywanych bibliotek klienckich do przetwarzania wiadomości (kafka-clients, spring-kafka, kafka-streams).

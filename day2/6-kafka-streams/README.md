@@ -29,6 +29,7 @@ docker ps | grep zookeeper
 kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic transactions
 kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic enriched_transactions
 kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic balances
+kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-factor 3 --create --topic transactions_timestamp 
 
 kafka-console-consumer --bootstrap-server localhost:29092 --topic balances --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.DoubleDeserializer"
 kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_timestamp --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
