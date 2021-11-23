@@ -29,7 +29,7 @@ public class AdvancedConsumer {
 
     public static KafkaConsumer<String, String> createConsumer(String topic) {
 
-        String bootstrapServers = "127.0.0.1:9092";
+        String bootstrapServers = "http://172.17.0.1:29092,http://172.17.0.1:39092,http://172.17.0.1:49092";
         String groupId = "kafka-advanced-consumer";
 
         Properties properties = new Properties();
