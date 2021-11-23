@@ -33,7 +33,7 @@
       <useProjectArtifact>true</useProjectArtifact>
       <useTransitiveFiltering>true</useTransitiveFiltering>
       <excludes>
-        <exclude>org.apache.kafka:connect-api</exclude>
+<!--        <exclude>org.apache.kafka:connect-api</exclude>-->
       </excludes>
     </dependencySet>
   </dependencySets>

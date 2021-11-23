@@ -22,7 +22,7 @@ public class AdvancedProducer {
     }
 
     public static KafkaProducer<String, String> createKafkaProducer() {
-        String bootstrapServers = "127.0.0.1:9092";
+        String bootstrapServers = "http://172.17.0.1:29092,http://172.17.0.1:39092,http://172.17.0.1:49092";
 
         Properties properties = new Properties();
 
