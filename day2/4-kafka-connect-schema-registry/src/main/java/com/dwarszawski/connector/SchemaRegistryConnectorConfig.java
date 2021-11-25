@@ -17,9 +17,8 @@ public class SchemaRegistryConnectorConfig extends AbstractConfig {
   }
 
   public static ConfigDef config() {
-    return new ConfigDef()
-            .define(SCHEMA_REGISTRY_URL, Type.STRING, "http://172.17.0.1:8081/", new EndpointValidator(), ConfigDef.Importance.HIGH, "schema registry url")
-            .define(TOPIC_CONFIG, ConfigDef.Type.STRING, "schema.updates", new ConfigDef.NonEmptyStringWithoutControlChars(), ConfigDef.Importance.HIGH, "name of the topic to produce to");
+    return new ConfigDef();
+      // TODO define connector config
 
   }
 }

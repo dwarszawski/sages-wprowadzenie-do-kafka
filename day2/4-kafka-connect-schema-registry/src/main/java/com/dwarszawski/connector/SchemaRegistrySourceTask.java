@@ -36,41 +36,14 @@ public class SchemaRegistrySourceTask extends org.apache.kafka.connect.source.So
         this.url = schemaRegistryUrl;
 
 
-        if (context != null && context.offsetStorageReader() != null) {
-            offsets = context.offsetStorageReader().offset(Collections.singletonMap(SCHEMA_REGISTRY_URL, url));
-        }
-
-        if (offsets == null) {
-            offsets = new HashMap<>();
-        }
+        // TODO recover offset from storage
     }
 
     @Override
     public List<SourceRecord> poll() {
         List<SourceRecord> records = new ArrayList<>();
 
-        try {
-            final Collection<String> allSubjects = client.getAllSubjects();
-            for (String subject : allSubjects) {
-                final SchemaMetadata latestSchemaMetadata = client.getLatestSchemaMetadata(subject);
-                offsets.forEach((k, v) -> System.out.println(k + ":" + v));
-                System.out.println("Latest schema *********************" + latestSchemaMetadata.getVersion());
-                if (latestSchemaMetadata.getVersion() > (int) offsets.getOrDefault(subject, -1)) {
-
-                    offsets.put(subject, (Object) latestSchemaMetadata.getVersion());
-
-                    SchemaUpdatedEvent schemaUpdateRequest = SchemaUpdateRequestFactory.newSchemaUpdateEvent(subject, latestSchemaMetadata);
-                    SourceRecordBuilder builder = new SourceRecordBuilder(schemaUpdateRequest, this.topic, this.url)
-                            .withPartition(SCHEMA_REGISTRY_URL, this.url)
-                            .withOffset(offsets);
-
-                    records.add(builder.build());
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Exception *********************" + e.getMessage());
-            // Exception *********************Invalid Java object for schema with type STRING: class java.lang.Integer for field: "Subject"
-        }
+        // TODO Implement processing logic here
 
         return records;
     }

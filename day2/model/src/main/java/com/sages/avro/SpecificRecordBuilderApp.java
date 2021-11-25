@@ -1,6 +1,5 @@
 package com.sages.avro;
 
-import com.sages.schema.evolution.backward.TransactionV1;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -12,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class SpecificRecordBuilderApp {
-
+/*
     public static void main(String[] args) throws IOException {
 
         File file = new File("day2/model/target/data.avro");
@@ -66,5 +65,5 @@ public class SpecificRecordBuilderApp {
                 return reader.lines().collect(Collectors.joining(System.lineSeparator()));
             }
         }
-    }
+    }*/
 }

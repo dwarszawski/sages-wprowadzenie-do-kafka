@@ -23,7 +23,8 @@ public class SourceRecordBuilder {
     }
 
     public SourceRecord build() {
-        return new SourceRecord(partition, offset, topic, Schema.STRING_SCHEMA, key, SchemaUpdatedEvent.SCHEMA_UPDATED_EVENT_SCHEMA, request.toStruct());
+        return null;
+        // TODO build source record
     }
 
     public SourceRecordBuilder withPartition(String key, String value) {
