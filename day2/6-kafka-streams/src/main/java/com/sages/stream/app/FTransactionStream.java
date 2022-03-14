@@ -21,7 +21,7 @@ public class FTransactionStream {
         var transactionSerde = new JsonSerde<>(Transaction.class);
         var doubleSerde = Serdes.Double();
 
-        var windowLength = Duration.ofHours(1);
+        var windowLength = Duration.ofSeconds(15);
         var windowSerde = WindowedSerdes.timeWindowedSerdeFrom(Long.class, windowLength.toMillis());
 
         var timestampExtractor = new RecordTimestampExtractor();

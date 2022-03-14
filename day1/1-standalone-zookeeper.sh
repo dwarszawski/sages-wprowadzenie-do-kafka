@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run -d --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:latest
+docker run -d --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:6.1.4
 
 docker ps
 netstat -nltp | grep 32181
@@ -24,7 +24,7 @@ nc -vz localhost 32181
 # with whitelisting four letter commands
 docker run -d  --name=zookeeper2  -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000  -e ZOOKEEPER_SYNC_LIMIT=2 \
   -e KAFKA_OPTS="-Dzookeeper.4lw.commands.whitelist=*" \
-  -p 32181:32181   confluentinc/cp-zookeeper:latest
+  -p 32181:32181   confluentinc/cp-zookeeper:6.1.4
 
 # healthcheck with zookeeper command
 echo "ruok" | nc localhost 32181 ; echo
