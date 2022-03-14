@@ -5,7 +5,7 @@
 docker network create mynetwork
 
 # run standalone zookeeper
-docker run -d -p 32181:32181 --network mynetwork --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:latest
+docker run -d -p 32181:32181 --network mynetwork --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:6.1.4
 
 # check if zookeeper container is running
 docker ps | grep zookeeper
@@ -22,7 +22,7 @@ docker ps | grep zookeeper
             -e  KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1 \
             -e KAFKA_TRANSACTION_STATE_LOG_MIN_ISR=1 \
             -e KAFKA_MIN_INSYNC_REPLICAS=1 \
-            confluentinc/cp-kafka:latest
+            confluentinc/cp-kafka:6.1.4
 
 # create topics scripts
 
@@ -33,6 +33,7 @@ kafka-topics --bootstrap-server 172.17.0.1:29092 --partitions 3 --replication-fa
 
 kafka-console-consumer --bootstrap-server localhost:29092 --topic balances --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.DoubleDeserializer"
 kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_timestamp --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
+kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_groups --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
 
 
 

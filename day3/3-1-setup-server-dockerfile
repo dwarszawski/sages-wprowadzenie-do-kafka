@@ -1,7 +1,8 @@
-FROM confluentinc/cp-kafka:latest
+FROM confluentinc/cp-kafka:6.1.4
 
 COPY tmp/kafka.server.keystore.jks /etc/kafka/secrets/kafka.server.keystore.jks
 COPY tmp/kafka.server.truststore.jks /etc/kafka/secrets/kafka.server.truststore.jks
 COPY tmp/ssl-key-creds /etc/kafka/secrets/ssl-key-creds
 COPY tmp/keystore-creds /etc/kafka/secrets/keystore-creds
 COPY tmp/truststore-creds /etc/kafka/secrets/truststore-creds
+COPY 4-1-setup-server-ssl.properties /tmp/client-ssl.properties

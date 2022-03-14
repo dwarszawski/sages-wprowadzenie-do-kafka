@@ -41,7 +41,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
     -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" \
     -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars \
     -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars \
-    confluentinc/cp-kafka-connect:latest
+    confluentinc/cp-kafka-connect:6.1.4
     #-v ${PWD}/target:/etc/kafka-connect/jars \
     #-v ${pwd}/target:/etc/kafka-connect/jars  for windows
     
@@ -49,7 +49,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
 * running container on Windows
 ```shell
 
-    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=172.17.0.1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:latest
+    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=172.17.0.1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:6.1.4
 
 ```
 

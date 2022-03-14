@@ -29,6 +29,11 @@ public class KafkaStreamConfig {
 		props.put(StreamsConfig.PROCESSING_GUARANTEE_CONFIG, StreamsConfig.EXACTLY_ONCE);
 		props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
 
+		// requires to run multiple instances running on the same filesystem
+		//props.put(StreamsConfig.STATE_DIR_CONFIG, "C:\\tmp\\instance1");
+		props.put(StreamsConfig.STATE_DIR_CONFIG, "/tmp/transaction_processor/instance2");
+
+
 		return new KafkaStreamsConfiguration(props);
 	}
 
