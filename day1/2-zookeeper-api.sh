@@ -1,14 +1,17 @@
 #!/bin/bash
 
-# interaktywny shell dla ZK
+# Enter one f the Zookeeper containers
+docker exec -it zzk-1 /bin/bash
+
+# Run interactive shell and connect to Zookeeper
 zookeeper-shell localhost:32181
 
-# wyświetl pomoc
+# Display help
 help
-# wyświetl "root"
+# Display root
 ls /
 
-# utwórz nowy "znode"
+# Create Znode API
 create /my-node "foo"
 ls /
 
@@ -20,14 +23,15 @@ ls /my-node
 ls /my-node/deeper-node
 get /my-node/deeper-node
 
-# zmodyfikuj wartość dla danej ścieżki
+# Modify metadata
 set /my-node/deeper-node "newdata"
 get /my-node/deeper-node
-# removes are recursive
-rmr /my-node
-ls /
-# create a watcher
+
+
+# Create a watcher to track the znode changes
 create /node-to-watch ""
 get /node-to-watch true
 set /node-to-watch "hhhas-changeddddd"
+
+# Delete a znode
 deleteall /node-to-watch

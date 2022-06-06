@@ -1,16 +1,14 @@
 package com.sages.stream.config;
 
-import java.util.HashMap;
-
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafkaStreams;
 import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
-import org.springframework.kafka.support.serializer.JsonSerde;
+
+import java.util.HashMap;
 
 @Configuration
 @EnableKafkaStreams
@@ -22,17 +20,7 @@ public class KafkaStreamConfig {
 
 		//mandatory configuration
 		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "transaction_processor");
-		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://172.17.0.1:29092, http://172.17.0.1:39092, http://172.17.0.1:49092");
-
-		props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.Long().getClass().getName());
-		props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.Double().getClass().getName());
-
-		props.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, "3000");
-
-		// exactly once once configuration
-		// can be configured with applications yamls
-		//props.put(StreamsConfig.PROCESSING_GUARANTEE_CONFIG, StreamsConfig.EXACTLY_ONCE);
-		//props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://{gateway-address}:29092, http://{gateway-address}:39092, http://{gateway-address}:49092");
 
 		// requires to run multiple instances running on the same filesystem
 		//props.put(StreamsConfig.STATE_DIR_CONFIG, "C:\\tmp\\instance1");

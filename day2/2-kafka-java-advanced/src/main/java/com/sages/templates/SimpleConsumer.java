@@ -10,9 +10,9 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class AdvancedConsumer {
+public class SimpleConsumer {
     public static void main(String[] args) {
-        String topic = "first_topic";
+        String topic = "mytopic";
 
         KafkaConsumer<String, String> consumer = createConsumer(topic);
 
@@ -24,14 +24,14 @@ public class AdvancedConsumer {
                 System.out.println("Key: " + record.key() + ", Value: " + record.value());
                 System.out.println("Partition: " + record.partition() + ", Offset:" + record.offset());
                 System.out.println("Timestamp: " + record.timestamp());
-                consumer.commitSync();
             }
+            consumer.commitSync();
         }
     }
 
     public static KafkaConsumer<String, String> createConsumer(String topic) {
 
-        String bootstrapServers = "http://172.17.0.1:29092,http://172.17.0.1:39092,http://172.17.0.1:49092";
+        String bootstrapServers = "http://{gateway-address}:29092,http://{gateway-address}:39092,http://{gateway-address}:49092";
         String groupId = "kafka-advanced-consumer";
 
         Properties properties = new Properties();
