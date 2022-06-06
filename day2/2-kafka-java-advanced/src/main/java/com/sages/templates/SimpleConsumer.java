@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -36,7 +37,7 @@ public class SimpleConsumer {
         // TODO setup consumer properties
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
-        consumer.subscribe(List.of(topic));
+        consumer.subscribe(Arrays.asList(topic));
 
         return consumer;
 

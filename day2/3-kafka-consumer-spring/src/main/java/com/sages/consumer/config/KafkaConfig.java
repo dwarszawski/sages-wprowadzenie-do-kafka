@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+import java.util.Map;
+
 //@Configuration
 public class KafkaConfig {
 
@@ -21,7 +23,7 @@ public class KafkaConfig {
 
     //@Bean
     public ConsumerFactory<Long, Transaction> consumerFactory() {
-        var properties = kafkaProperties.buildConsumerProperties();
+        Map<String, Object> properties = kafkaProperties.buildConsumerProperties();
         //time before enforcing metadata fetch request - enable to discover new partition or brokers
         properties.put(ConsumerConfig.METADATA_MAX_AGE_CONFIG, "600000");
 
