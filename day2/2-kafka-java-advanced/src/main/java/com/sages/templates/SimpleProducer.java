@@ -5,12 +5,12 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
 
-public class AdvancedProducer {
+public class SimpleProducer {
 
     public static void main(String[] args) {
         KafkaProducer<String, String> producer = createKafkaProducer();
 
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>("first_topic", "hello world");
+        ProducerRecord<String, String> record = new ProducerRecord<String, String>("mytopic", "hello world");
 
         producer.send(record);
 
@@ -20,7 +20,7 @@ public class AdvancedProducer {
     }
 
     public static KafkaProducer<String, String> createKafkaProducer() {
-        String bootstrapServers = "http://172.17.0.1:29092,http://172.17.0.1:39092,http://172.17.0.1:49092";
+        String bootstrapServers = "http://{gateway-address}:29092,http://{gateway-address}:39092,http://{gateway-address}:49092";
 
         Properties properties = new Properties();
         // TODO setup producer properties

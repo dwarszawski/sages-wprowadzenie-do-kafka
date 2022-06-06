@@ -76,6 +76,6 @@ To nie tylko szansa na rozwój ale również konfrontacja różych punktów widz
 
 ### Tekst na certyfikat
 
-Szkolenie obejmowało łącznie 16 godzin wykładów oraz praktycznych ćwiczeń jako wprowadzenie do architektury sterowanej zdarzeniami z wykorzystaniem ekosystemu Apache Kafka.
-Uczestnicy nabyli umiejętność efektywnego projektowania i administrowania klastrem serwerów Apache Kafka.
-W ramach warsztatów, uczestnicy poznali podstawy powszechnie wykorzystywanych bibliotek klienckich do przetwarzania wiadomości (kafka-clients, spring-kafka, kafka-streams).
+Szkolenie obejmowało łącznie 24 godziny wykładów oraz praktycznych ćwiczeń jako wprowadzenie do architektury sterowanej zdarzeniami z wykorzystaniem ekosystemu Apache Kafka.
+Uczestnicy nabyli umiejętność efektywnego projektowania i administrowania klastrem serwerów Apache Kafka oraz Apache Zookeeper.
+W ramach warsztatów, uczestnicy poznali podstawy powszechnie wykorzystywanych bibliotek klienckich do przetwarzania zdarzeń (kafka-clients, spring-kafka, kafka-streams).
