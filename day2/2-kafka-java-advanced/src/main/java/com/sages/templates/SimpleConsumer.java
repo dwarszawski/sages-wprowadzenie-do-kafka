@@ -43,7 +43,7 @@ public class SimpleConsumer {
         properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
         properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
 
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties);
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(Arrays.asList(topic));
 
         return consumer;
