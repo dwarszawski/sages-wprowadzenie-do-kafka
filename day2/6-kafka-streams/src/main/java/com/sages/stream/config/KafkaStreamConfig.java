@@ -9,6 +9,7 @@ import org.springframework.kafka.annotation.KafkaStreamsDefaultConfiguration;
 import org.springframework.kafka.config.KafkaStreamsConfiguration;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableKafkaStreams
@@ -16,11 +17,11 @@ public class KafkaStreamConfig {
 
 	@Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
 	public KafkaStreamsConfiguration kafkaStreamConfig() {
-		var props = new HashMap<String, Object>();
+		Map<String, Object> props = new HashMap<String, Object>();
 
 		//mandatory configuration
 		props.put(StreamsConfig.APPLICATION_ID_CONFIG, "transaction_processor");
-		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://{gateway-address}:29092, http://{gateway-address}:39092, http://{gateway-address}:49092");
+		props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "http://kafka-1:29092, http://kafka-2:39092, http://kafka-3:49092");
 
 		// requires to run multiple instances running on the same filesystem
 		//props.put(StreamsConfig.STATE_DIR_CONFIG, "C:\\tmp\\instance1");

@@ -50,55 +50,28 @@ Należy zainstalować następujące komponenty:
         
         $ docker run --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181-e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:6.1.4
 
-    Sprawdzenie czy sieć typu docker bridge jest dostępna z poziomu maszyny hostującej
-
-        $docker network create mynetwork
-        $docker network inspect mynetwork
-
-    Przykład wykonania poniżej. Docker powinien wystawić adres IP "Gateway" jak w przykładzie poniżej
-    ```json
-    [
-        {
-            "Name": "mynetwork",
-            "Id": "6c37c7036e75577a311b3296f168f9a3bb85116f6ac8d9bbfac0486f03c1ec3f",
-            "Created": "2022-05-25T12:32:04.256044191+02:00",
-            "Scope": "local",
-            "Driver": "bridge",
-            "EnableIPv6": false,
-            "IPAM": {
-                "Driver": "default",
-                "Options": {},
-                "Config": [
-                    {
-                        "Subnet": "172.27.0.0/16",
-                        "Gateway": "172.27.0.1"
-                    }
-                ]
-            },
-            "Internal": false,
-            "Attachable": false,
-            "Ingress": false,
-            "ConfigFrom": {
-                "Network": ""
-            },
-            "ConfigOnly": false,
-            "Containers": {},
-            "Options": {},
-            "Labels": {}
-        }
-    ]
-    
-    ```
 
     Przydatne linki:
     
     *   https://docs.docker.com/docker-for-windows/install/ 
 
 
-*   IntelliJ IDEA w wersji `community` lub `ultimate` + docker plugin
+*   IntelliJ IDEA w wersji `Community` lub `Ultimate`
 
     Przydatne linki:
     
     * https://www.jetbrains.com/idea/
     * https://www.jetbrains.com/help/idea/managing-plugins.html
 
+*   IntelliJ IDEA docker plugin
+
+    Wersja IntelliJ Ultimate domyślnie zawiera plugin Docker.
+    
+    Dla wersji Community wymagana jest instalacja przez Marketplace:
+   
+    * Po uruchomieniu wersji Community należy użyć skrót ctrl + alt + s i wyszukać frazę `plugins`. Po wybraniu zakładki `plugins` należy wyszukać frazę `docker` z listy dostępnych pluginów w `Marketplace` i roczpocząć instalacje.
+   
+    Przydatne linki:
+   
+    * https://www.youtube.com/watch?v=ck6xQqSOlpw
+    * https://www.jetbrains.com/help/idea/docker.html

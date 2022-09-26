@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class SimpleConsumer {
     public static void main(String[] args) {
-        String topic = "mytopic";
+        String topic = "sages";
 
         KafkaConsumer<String, String> consumer = createConsumer(topic);
 
@@ -30,8 +30,8 @@ public class SimpleConsumer {
 
     public static KafkaConsumer<String, String> createConsumer(String topic) {
 
-        String bootstrapServers = "http://{gateway-address}:29092,http://{gateway-address}:39092,http://{gateway-address}:49092";
-        String groupId = "kafka-advanced-consumer";
+        String bootstrapServers = "http://kafka-1:29092,http://kafka-2:39092,http://kafka-3:49092";
+        String groupId = "kafka-consumers";
 
         Properties properties = new Properties();
         // TODO setup consumer properties

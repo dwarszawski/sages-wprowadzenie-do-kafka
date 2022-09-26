@@ -67,7 +67,7 @@ docker run -d \
     -p 29092:29092 \
     --network mynetwork \
     -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
-    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.17.0.1:29092 \
+    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:29092 \
     -e KAFKA_MIN_INSYNC_REPLICAS=2 \
     confluentinc/cp-kafka:6.1.4
 
@@ -76,7 +76,7 @@ docker run -d \
     -p 39092:39092 \
     --network mynetwork \
     -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
-    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.17.0.1:39092 \
+    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:39092 \
     -e KAFKA_MIN_INSYNC_REPLICAS=2 \
     confluentinc/cp-kafka:6.1.4
 
@@ -86,14 +86,14 @@ docker run -d \
     -p 49092:49092 \
      --network mynetwork \
      -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 \
-     -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://172.17.0.1:49092 \
+     -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:49092 \
      -e KAFKA_MIN_INSYNC_REPLICAS=2 \
      confluentinc/cp-kafka:6.1.4
 
 # Run kafka cluster on windows
-docker run -d --name=kafka-1 -p 29092:29092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://gateway-adress:29092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
-docker run -d --name=kafka-2 -p 39092:39092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://gateway-adress:39092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
-docker run -d --name=kafka-3 -p 49092:49092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://gateway-adress:49092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
+docker run -d --name=kafka-1 -p 29092:29092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:29092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
+docker run -d --name=kafka-2 -p 39092:39092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:39092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
+docker run -d --name=kafka-3 -p 49092:49092 --network mynetwork -e KAFKA_ZOOKEEPER_CONNECT=zzk-1:22181,zzk-2:32181,zzk-3:42181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:49092 -e KAFKA_MIN_INSYNC_REPLICAS=2 confluentinc/cp-kafka:6.1.4
 
 #####################################################################################################################################################################################
 

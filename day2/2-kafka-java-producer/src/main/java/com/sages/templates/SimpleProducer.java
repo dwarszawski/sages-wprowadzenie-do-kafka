@@ -10,7 +10,7 @@ public class SimpleProducer {
     public static void main(String[] args) {
         KafkaProducer<String, String> producer = createKafkaProducer();
 
-        ProducerRecord<String, String> record = new ProducerRecord<String, String>("mytopic", "hello world");
+        ProducerRecord<String, String> record = new ProducerRecord<String, String>("sages", "hello world");
 
         producer.send(record);
 
@@ -20,7 +20,7 @@ public class SimpleProducer {
     }
 
     public static KafkaProducer<String, String> createKafkaProducer() {
-        String bootstrapServers = "http://{gateway-address}:29092,http://{gateway-address}:39092,http://{gateway-address}:49092";
+        String bootstrapServers = "http://kafka-1:29092,http://kafka-2:39092,http://kafka-3:49092";
 
         Properties properties = new Properties();
         // TODO setup producer properties

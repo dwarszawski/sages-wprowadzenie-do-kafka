@@ -25,7 +25,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
     --name=kafka-connect \
     -p 8083:8083 \
     --network mynetwork \
-    -e CONNECT_BOOTSTRAP_SERVERS=172.17.0.1:29092 \
+    -e CONNECT_BOOTSTRAP_SERVERS=kafka-1:29092 \
     -e CONNECT_REST_PORT=8083 \
     -e CONNECT_GROUP_ID="connectors" \
     -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" \
@@ -49,7 +49,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
 * running container on Windows
 ```shell
 
-    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=172.17.0.1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:6.1.4
+    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=kafka-1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:6.1.4
 
 ```
 
@@ -60,7 +60,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
     --name=kafka-connect-ui \
     -p 8000:8000 \
     --network mynetwork \
-    -e CONNECT_URL="http://172.17.0.1:8083" \
+    -e CONNECT_URL="http://{gateway-address}:8083" \
     landoop/kafka-connect-ui
 ```
 
@@ -68,7 +68,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
 
 ```shell 
 
-docker run -d --name=kafka-connect-ui  -p 8000:8000 --network mynetwork -e CONNECT_URL="http://172.17.0.1:8083" landoop/kafka-connect-ui
+docker run -d --name=kafka-connect-ui  -p 8000:8000 --network mynetwork -e CONNECT_URL="http://{gateway-address}:8083" landoop/kafka-connect-ui
 
 ```
 
@@ -77,7 +77,7 @@ docker run -d --name=kafka-connect-ui  -p 8000:8000 --network mynetwork -e CONNE
 ```shell
 
 docker exec -it kafka-1 /bin/bash
-kafka-topics --bootstrap-server 172.17.0.1:29092,172.17.0.1:39092,172.17.0.1:49092 --partitions 3 --replication-factor 3 --create --topic schema.updates
+kafka-topics --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --partitions 3 --replication-factor 3 --create --topic schema.updates
 
 ```
 
@@ -90,7 +90,7 @@ Kafka Connect UI is available [here](http://172.17.0.1:8000/)
     connector.class=com.dwarszawski.connector.SchemaRegistrySourceConnector
     tasks.max=1
     topic=schema.updates
-    schema_registry_url=http://172.17.0.1:8081
+    schema_registry_url=http://schema-registry:8081
 ```
 
 Check logs of schema registry
