@@ -16,7 +16,9 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 
-@Configuration
+import java.util.Map;
+
+//@Configuration
 public class AvroKafkaConfig {
 
     private static final Logger log = LoggerFactory.getLogger(AvroKafkaConfig.class);
@@ -26,7 +28,7 @@ public class AvroKafkaConfig {
 
     @Bean
     public ConsumerFactory<Long, Transaction1> consumerFactory() {
-        var properties = kafkaProperties.buildConsumerProperties();
+        Map<String, Object> properties = kafkaProperties.buildConsumerProperties();
         //time before enforcing metadata fetch request - enable to discover new partition or brokers
         properties.put(ConsumerConfig.METADATA_MAX_AGE_CONFIG, "600000");
         properties.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, SpecificAvroSerde.class.getName());
@@ -37,7 +39,7 @@ public class AvroKafkaConfig {
 
     @Bean(name = "consumerContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<Long, Transaction1> farLocationContainerFactory() {
-        var factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction1>();
+        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction1>();
 
         factory.setConsumerFactory(consumerFactory());
         factory.setErrorHandler(new GlobalErrorHandler());

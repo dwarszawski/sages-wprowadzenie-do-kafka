@@ -18,9 +18,9 @@ public class DTransactionStream {
 
     @Bean
     public KStream<Long, Transaction> dStream(StreamsBuilder builder) {
-        var transactionSerde = new JsonSerde<>(Transaction.class);
+        JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
 
-        var balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
+        KStream<Long, Transaction> balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
 
         balanceStream
                 .selectKey((k, v) -> v.getId())

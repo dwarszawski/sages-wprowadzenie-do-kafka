@@ -30,7 +30,7 @@ import java.time.LocalDateTime;
 
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class KafkaConfig {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaConfig.class);
@@ -50,7 +50,7 @@ public class KafkaConfig {
 
     @Bean(name = "consumerContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<Long, Transaction> farLocationContainerFactory() {
-        var factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
+        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
 
         factory.setConsumerFactory(consumerFactory());
         factory.setErrorHandler(new GlobalErrorHandler());
@@ -63,7 +63,7 @@ public class KafkaConfig {
 
             @Override
             public boolean filter(ConsumerRecord<Long, Transaction> consumerRecord) {
-                    var transaction = consumerRecord.value();
+                Transaction transaction = consumerRecord.value();
                     return transaction.getDate().isBefore(LocalDateTime.now().minusDays(7));
             }
         });
@@ -78,7 +78,7 @@ public class KafkaConfig {
     //The idea behind using exponential backoff with retry is that instead of retrying after waiting for a fixed amount of time, we increase the waiting time between reties after each retry failure.
     @Bean(value = "retryContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<Long, Transaction> retryContainerFactory() {
-        var factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
+        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
 
         factory.setConsumerFactory(consumerFactory());
         factory.setErrorHandler(new GlobalErrorHandler());
@@ -86,13 +86,13 @@ public class KafkaConfig {
         factory.getContainerProperties().setPollTimeout(3000);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
-        var retryTemplate = new RetryTemplate();
+        RetryTemplate retryTemplate = new RetryTemplate();
 
-        var retryPolicy = new SimpleRetryPolicy(3);
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(3);
         retryTemplate.setRetryPolicy(retryPolicy);
 
 
-        var backoffPolicy = new FixedBackOffPolicy();
+        FixedBackOffPolicy backoffPolicy = new FixedBackOffPolicy();
         backoffPolicy.setBackOffPeriod(10000);
         retryTemplate.setBackOffPolicy(backoffPolicy);
 
@@ -129,7 +129,7 @@ public class KafkaConfig {
 
     @Bean(value = "deadLetterContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<Long, Transaction> deadLetterContainerFactory(KafkaTemplate<Long, Transaction> kafkaTemplate) {
-        var factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
+        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
 
         factory.setConsumerFactory(consumerFactory());
         factory.setConcurrency(3);
@@ -137,12 +137,12 @@ public class KafkaConfig {
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
 
         // same partition as failed record
-        var recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate,
+        DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(kafkaTemplate,
                 (record, ex) -> new TopicPartition("transactions_dead_letters", record.partition()));
 
         // message which failed - no ack
         // try retry before sending dead letter
-        var errorHandler = new SeekToCurrentErrorHandler(recoverer, new FixedBackOff(5_000, 2));
+        SeekToCurrentErrorHandler errorHandler = new SeekToCurrentErrorHandler(recoverer, new FixedBackOff(5_000, 2));
         factory.setErrorHandler(errorHandler);
 
         return factory;

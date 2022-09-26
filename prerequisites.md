@@ -95,9 +95,10 @@ Należy zainstalować następujące komponenty:
     *   https://docs.docker.com/docker-for-windows/install/ 
 
 
-*   IntelliJ IDEA w wersji `community`
+*   IntelliJ IDEA w wersji `community` lub `ultimate` + docker plugin
 
     Przydatne linki:
     
-    *   https://www.jetbrains.com/idea/
+    * https://www.jetbrains.com/idea/
+    * https://www.jetbrains.com/help/idea/managing-plugins.html
 

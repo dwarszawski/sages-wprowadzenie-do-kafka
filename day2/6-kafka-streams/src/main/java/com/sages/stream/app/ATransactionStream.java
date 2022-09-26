@@ -13,14 +13,14 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 
 // Simple kafka stream
 // see config file
-//@Configuration
+@Configuration
 public class ATransactionStream {
 
     // spring takes care of stream lifycycle - starting and stopping stream
     @Bean
     public KStream<Long, String> aStream(StreamsBuilder builder) {
 
-        var transactionSerde = new JsonSerde<>(Transaction.class);
+        JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
 
         KStream<Long, Transaction> transactions = builder.stream("transactions",
                 Consumed.with(Serdes.Long(), transactionSerde));

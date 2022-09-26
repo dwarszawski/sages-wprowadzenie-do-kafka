@@ -1,6 +1,7 @@
 package com.sages.stream.app;
 
 import com.sages.model.Transaction;
+import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
@@ -17,10 +18,10 @@ public class CTransactionStream {
 
     @Bean
     public KStream<Long, Transaction> cStream(StreamsBuilder builder) {
-        var transactionSerde = new JsonSerde<>(Transaction.class);
-        var doubleSerde = Serdes.Double();
+        JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
+        final Serde<Double> doubleSerde = Serdes.Double();
 
-        var balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
+        KStream<Long, Transaction> balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
 
         balanceStream
                 .selectKey((k, v) -> v.getId())

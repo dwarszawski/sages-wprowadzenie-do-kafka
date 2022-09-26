@@ -18,11 +18,11 @@ public class ETransactionStream {
 
     @Bean
     public KStream<Long, Transaction> eStream(StreamsBuilder builder) {
-        var jsonSerde = new JsonSerde<>(Transaction.class);
-        var timestampExtractor = new RecordTimestampExtractor();
+        JsonSerde jsonSerde = new JsonSerde<>(Transaction.class);
+        RecordTimestampExtractor timestampExtractor = new RecordTimestampExtractor();
 
         // null for reset policy (auto offset reset) - to enforce default configuration
-        var transactions = builder.stream("transactions",
+        KStream<Long, Transaction> transactions = builder.stream("transactions",
                 Consumed.with(Serdes.Long(), jsonSerde, timestampExtractor, null));
 
         transactions.to("transactions_timestamp", Produced.with(Serdes.Long(), jsonSerde));

@@ -20,8 +20,8 @@ public class BTransactionStream {
     @Bean
     public KStream<Long, Transaction> bStream(StreamsBuilder builder) {
 
-        var transactionJsonSerde = new JsonSerde<>(Transaction.class);
-        var enrichedTransactionJsonSerde = new JsonSerde<>(EnrichedTransaction.class);
+        JsonSerde transactionJsonSerde = new JsonSerde<>(Transaction.class);
+        JsonSerde enrichedTransactionJsonSerde = new JsonSerde<>(EnrichedTransaction.class);
 
         KStream<Long, Transaction> sourceStream = builder.stream("transactions",
                 Consumed.with(Serdes.Long(), transactionJsonSerde));

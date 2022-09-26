@@ -18,8 +18,8 @@ public class KafkaConfig {
     @Autowired
     private KafkaProperties kafkaProperties;
 
-   // @Bean
-    public KafkaTemplate<Long, Transaction> kafkaTemplate() {
+   @Bean
+   public KafkaTemplate<Long, Transaction> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

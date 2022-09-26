@@ -11,7 +11,7 @@ public class RecordTimestampExtractor implements org.apache.kafka.streams.proces
 
     @Override
     public long extract(ConsumerRecord<Object, Object> record, long partitionTime) {
-        var message = (Transaction) record.value();
+        Transaction message = (Transaction) record.value();
 
         return message != null ? toEpochTimestamp(message.getDate())
                 : record.timestamp();

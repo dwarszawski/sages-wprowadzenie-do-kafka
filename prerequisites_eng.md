@@ -60,11 +60,12 @@ Following components must be installed:
     *   https://docs.docker.com/docker-for-windows/install/ 
 
 
-* IntelliJ IDEA `community` or `enterprise` version
+* IntelliJ IDEA `community` or `enterprise` version + docker plugin
 
     Useful links:
     
-    *   https://www.jetbrains.com/idea/
+    * https://www.jetbrains.com/idea/
+    * https://www.jetbrains.com/help/idea/managing-plugins.html
 
 * OpenSSL cli
 

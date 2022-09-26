@@ -10,20 +10,22 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
+import java.util.Map;
+
 @Configuration
 public class AvroKafkaConfig {
 
     @Autowired
     private KafkaProperties kafkaProperties;
 
-    @Bean
+    //@Bean
     public KafkaTemplate<Long, Transaction1> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
     public ProducerFactory<Long, Transaction1> producerFactory() {
-        var properties = kafkaProperties.buildProducerProperties();
+        Map<String, Object> properties = kafkaProperties.buildProducerProperties();
         properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, "180000");
 
         return new DefaultKafkaProducerFactory<>(properties);

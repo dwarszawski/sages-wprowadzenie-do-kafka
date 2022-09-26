@@ -11,15 +11,6 @@
 
     <artifactId>kafka-consumer</artifactId>
 
-    <repositories>
-        <repository>
-            <id>confluent.io</id>
-            <name>confluent.io</name>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

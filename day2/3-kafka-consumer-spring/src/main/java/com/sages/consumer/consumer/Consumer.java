@@ -7,7 +7,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class Consumer {
 
     private static final Logger log = LoggerFactory.getLogger(Consumer.class);

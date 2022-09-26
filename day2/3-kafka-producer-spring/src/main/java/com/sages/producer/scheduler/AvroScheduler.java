@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-@Service
+//@Service
 public class AvroScheduler {
 
     private static final Logger log = LoggerFactory.getLogger(AvroScheduler.class);
