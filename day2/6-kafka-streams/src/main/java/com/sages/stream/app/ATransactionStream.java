@@ -11,12 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonSerde;
 
-// Simple kafka stream
-// see config file
-@Configuration
+// Simple kafka stream app
+//@Configuration
 public class ATransactionStream {
 
-    // spring takes care of stream lifycycle - starting and stopping stream
     @Bean
     public KStream<Long, String> aStream(StreamsBuilder builder) {
 

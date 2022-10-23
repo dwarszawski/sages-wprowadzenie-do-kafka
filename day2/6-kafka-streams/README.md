@@ -33,11 +33,11 @@ kafka-topics --bootstrap-server kafka-1:29092 --partitions 3 --replication-facto
 
 kafka-console-consumer --bootstrap-server localhost:29092 --topic balances --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.DoubleDeserializer"
 kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_timestamp --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
-kafka-console-consumer --bootstrap-server localhost:29092 --topic transactions_groups --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
+kafka-console-consumer --bootstrap-server localhost:29092 --topic suspicious_accounts --property print.key=true  --property key.separator=" : " --key-deserializer "org.apache.kafka.common.serialization.LongDeserializer"  --value-deserializer "org.apache.kafka.common.serialization.StringDeserializer"
 
 
 
-kafka-topics --bootstrap-server kafka-1:29092 --partitions 3 --replication-factor 3 --create --topic transactions_groups
+kafka-topics --bootstrap-server kafka-1:29092 --partitions 3 --replication-factor 3 --create --topic suspicious_accounts
 
  key       window start  window end       value
 [708877241@1624914000000/1624917600000], -2000.0
