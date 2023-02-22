@@ -8,11 +8,11 @@
 docker run \
   --network mynetwork \
   --rm \
-  confluentinc/cp-kafka:6.1.4 \
+  confluentinc/cp-kafka:latest \
   kafka-topics --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --create --topic mytopic --partitions 3 --replication-factor 3 --if-not-exists
 
 ## Windows version
-docker run --network mynetwork --rm confluentinc/cp-kafka:6.1.4 kafka-topics --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --create --topic mytopic --partitions 3 --replication-factor 3
+docker run --network mynetwork --rm confluentinc/cp-kafka:latest kafka-topics --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --create --topic mytopic --partitions 3 --replication-factor 3
 
 
 #####################################################################################################################################################################################
@@ -24,11 +24,11 @@ docker run \
   -it \
   --network mynetwork \
   --rm \
-  confluentinc/cp-kafka:6.1.4 \
+  confluentinc/cp-kafka:latest \
  /bin/bash
 
 ## Windows version
-docker run  -it  --network mynetwork  --rm  confluentinc/cp-kafka:6.1.4 /bin/bash
+docker run  -it  --network mynetwork  --rm  confluentinc/cp-kafka:latest /bin/bash
 
 #base64 /dev/urandom | head -c 10000 | egrep -ao "\w" | tr -d '\n' > random.txt  && kafka-producer-perf-test --topic test --num-records 10000 --throughput 5 --payload-file random.txt --producer-props acks=1 bootstrap.servers=kafka-1:29092,kafka-2:39092,kafka-3:49092 --payload-delimiter A
 
@@ -40,11 +40,11 @@ docker run  -it  --network mynetwork  --rm  confluentinc/cp-kafka:6.1.4 /bin/bas
 docker run \
  --rm \
  --network mynetwork \
- confluentinc/cp-kafka:6.1.4 \
+ confluentinc/cp-kafka:latest \
  kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic mytopic
 
 ## Windows version
-docker run --rm --network mynetwork confluentinc/cp-kafka:6.1.4 kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic mytopic
+docker run --rm --network mynetwork confluentinc/cp-kafka:latest kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic mytopic
 
 #####################################################################################################################################################################################
 
