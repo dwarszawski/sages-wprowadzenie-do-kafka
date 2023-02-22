@@ -17,7 +17,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
+import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.listener.adapter.RecordFilterStrategy;
 import org.springframework.retry.RecoveryCallback;
 import org.springframework.retry.RetryContext;
@@ -142,8 +142,8 @@ public class KafkaConfig {
 
         // message which failed - no ack
         // try retry before sending dead letter
-        SeekToCurrentErrorHandler errorHandler = new SeekToCurrentErrorHandler(recoverer, new FixedBackOff(5_000, 2));
-        factory.setErrorHandler(errorHandler);
+        DefaultErrorHandler errorHandler = new DefaultErrorHandler(recoverer, new FixedBackOff(5_000, 2));
+        factory.setCommonErrorHandler(errorHandler);
 
         return factory;
     }

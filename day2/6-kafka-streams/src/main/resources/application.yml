@@ -1,9 +1,6 @@
 spring:
-  main:
-    banner-mode: OFF
   kafka:
-    listener:
-      missing-topics-fatal: false
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    streams:
+      application-id: "transaction_processor"
+      bootstrap-servers: http://kafka-1:29092, http://kafka-2:39092, http://kafka-3:49092
+      state-dir: "/tmp/transaction_processor/instance2"

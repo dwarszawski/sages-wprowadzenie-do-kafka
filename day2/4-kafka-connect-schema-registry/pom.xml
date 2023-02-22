@@ -10,14 +10,11 @@
     <description>A Kafka Connect Source Connector for Confluent Schema Registry</description>
 
     <properties>
-        <schema-registry-client-version>7.0.0</schema-registry-client-version>
-        <kafka-clients.version>3.0.0</kafka-clients.version>
+        <schema-registry-client-version>7.3.1</schema-registry-client-version>
+        <kafka-clients.version>3.2.3</kafka-clients.version>
         <jackson-data-bind.version>2.13.0</jackson-data-bind.version>
         <commons-validator.version>1.6</commons-validator.version>
-        <connect-api.version>3.0.0</connect-api.version>
-        <protobuf.version>3.6.0</protobuf.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <connect-api.version>3.2.3</connect-api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -116,6 +113,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

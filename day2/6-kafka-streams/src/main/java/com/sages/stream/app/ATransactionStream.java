@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonSerde;
 
 // Simple kafka stream app
-//@Configuration
+@Configuration
 public class ATransactionStream {
 
     @Bean
