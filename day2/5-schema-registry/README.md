@@ -14,14 +14,14 @@
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT \
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* \
     -e SCHEMA_REGISTRY_DEBUG=true \
-    confluentinc/cp-schema-registry:latest
+    confluentinc/cp-schema-registry:7.3.2
 ```
 
 
 * running container on Windows
 
 ```shell 
-docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:latest
+docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:7.3.2
 ```
 
 * REST API available
@@ -40,14 +40,14 @@ docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_
     -p 8084:8000 \
     --network mynetwork \
     --name=schema-registry-ui \
-    -e "SCHEMAREGISTRY_URL=http://{gateway-address}:8081" \
+    -e "SCHEMAREGISTRY_URL=http://localhost:8081" \
     landoop/schema-registry-ui
 ```
 
 * running container on Windows
 
 ```shell 
-    docker run -d -p 8084:8000 --network mynetwork --name=schema-registry-ui -e "SCHEMAREGISTRY_URL=http://{gateway-address}:8081" landoop/schema-registry-ui
+    docker run -d -p 8084:8000 --network mynetwork --name=schema-registry-ui -e "SCHEMAREGISTRY_URL=http://localhost:8081" landoop/schema-registry-ui
 ```
 
 ### Create new schema version using Schema Registry UI

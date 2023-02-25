@@ -48,7 +48,7 @@ keytool -list -v -keystore kafka.client.keystore.jks
 
 * Run Zookeeper container
 ```text
-docker run -d --network mynetwork --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:latest
+docker run -d --network mynetwork --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:7.3.2
 ```
 
 * Run Kafka brokers with SSL authentication enabled

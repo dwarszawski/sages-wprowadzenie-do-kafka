@@ -48,7 +48,7 @@ Należy zainstalować następujące komponenty:
         
     Sprawdzenie czy klient `docker` ma możliwość pobrania obrazu z `docker hub` i czy poprawnie się uruchomił
         
-        $ docker run --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181-e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:latest
+        $ docker run --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181-e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:7.3.2
 
     Sprawdzenie czy sieć typu docker bridge jest dostępna z poziomu maszyny hostującej
 
