@@ -9,6 +9,12 @@
     <name>kafka-connect-schema-registry</name>
     <description>A Kafka Connect Source Connector for Confluent Schema Registry</description>
 
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
     <properties>
         <schema-registry-client-version>7.3.1</schema-registry-client-version>
         <kafka-clients.version>3.2.3</kafka-clients.version>
@@ -31,6 +37,7 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-api</artifactId>
             <version>${connect-api.version}</version>
+<!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>io.confluent</groupId>
@@ -45,18 +52,18 @@
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-runtime</artifactId>
-            <version>3.0.0</version>
+            <version>${connect-api.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-transforms</artifactId>
-            <version>3.0.0</version>
+            <version>${connect-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-json</artifactId>
-            <version>3.0.0</version>
+            <version>${connect-api.version}</version>
         </dependency>
 
 <!--        <dependency>
@@ -125,10 +132,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-    </repositories>
 </project>

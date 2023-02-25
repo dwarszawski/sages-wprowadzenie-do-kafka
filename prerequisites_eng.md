@@ -4,7 +4,7 @@ The prepared source code and scripts should work on any OS assuming that docker 
 
 Following components must be installed:
 
-*   JAVA JDK version >= 1.8
+*   JAVA JDK version >= 11
     
     Verify if `jdk` is available on the path with Bash/Shell or CMD/Powershell:    
     
@@ -53,7 +53,7 @@ Following components must be installed:
         -e ZOOKEEPER_CLIENT_PORT=32181 \
         -e ZOOKEEPER_TICK_TIME=2000 \
         -e ZOOKEEPER_SYNC_LIMIT=2 \
-        confluentinc/cp-zookeeper:latest
+        confluentinc/cp-zookeeper:7.3.2
         
     Useful links:
     
