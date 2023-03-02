@@ -12,7 +12,7 @@ import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class AvroKafkaConfig {
 
     @Autowired

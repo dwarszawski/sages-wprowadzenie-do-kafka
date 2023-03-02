@@ -17,6 +17,7 @@ public class Transaction {
 
     private String description;
 
+    private long accountId;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -25,10 +26,11 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(long id, double value, String description, LocalDateTime date) {
+    public Transaction(long id, double value, String description, long accountId, LocalDateTime date) {
         this.id = id;
         this.value = value;
         this.description = description;
+        this.accountId = accountId;
         this.date = date;
     }
 
@@ -62,5 +64,13 @@ public class Transaction {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 }

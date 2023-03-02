@@ -21,10 +21,10 @@ public class Scheduler {
 
     @Scheduled(fixedRate = 5000)
     public void generateTransaction() throws JsonProcessingException {
-        Transaction first = new Transaction(generateTransactionId(), 10.00, "DEBIT", LocalDateTime.now());
-        Transaction second = new Transaction(generateTransactionId(), 2000.00, "CREDIT", LocalDateTime.now());
-        Transaction third = new Transaction(generateTransactionId(), 100.00 ,"DEBIT", LocalDateTime.now());
-        Transaction invalid = new Transaction(generateTransactionId(),  5.25, "invalid", LocalDateTime.now());
+        Transaction first = new Transaction(generateTransactionId(), 10.00, "DEBIT", generateAccountId(), LocalDateTime.now());
+        Transaction second = new Transaction(generateTransactionId(), 2000.00, "CREDIT", generateAccountId(), LocalDateTime.now());
+        Transaction third = new Transaction(generateTransactionId(), 100.00 ,"DEBIT", generateAccountId(), LocalDateTime.now());
+//        Transaction invalid = new Transaction(generateTransactionId(),  5.25, "invalid", generateAccountId(), LocalDateTime.now());
 
         first.setDate(LocalDateTime.now().minusWeeks(2));
 
@@ -40,6 +40,12 @@ public class Scheduler {
     private long generateTransactionId() {
         long leftLimit = 1L;
         long rightLimit = 1_000_000_000L;
+        return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+    }
+
+    private long generateAccountId() {
+        long leftLimit = 1L;
+        long rightLimit = 10L;
         return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
     }
 

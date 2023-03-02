@@ -13,7 +13,7 @@ import org.springframework.kafka.support.serializer.JsonSerde;
 import java.time.Duration;
 
 // Tumbling time window
-@Configuration
+//@Configuration
 public class ETransactionStream {
 
     @Bean

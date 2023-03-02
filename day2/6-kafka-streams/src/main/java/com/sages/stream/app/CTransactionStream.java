@@ -24,7 +24,7 @@ public class CTransactionStream {
         KStream<Long, Transaction> balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
 
         balanceStream
-                .selectKey((k, v) -> v.getId())
+                .selectKey((k, v) -> v.getAccountId())
                 .mapValues((k, v) -> v.getValue())
                 .groupByKey()
                 // initializer is only called when no record exists for given key
