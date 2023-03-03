@@ -1,47 +1,38 @@
 package com.sages.stream.app;
 
 import com.sages.model.Transaction;
-import com.sages.stream.dto.EnrichedTransaction;
+import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Printed;
+import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonSerde;
 
-
-// Generating enriched transactions
+// Aggregatoting to balance stream
 //@Configuration
 public class BTransactionStream {
 
     @Bean
-    public KStream<Long, Transaction> bStream(StreamsBuilder builder) {
+    public KStream<Long, Transaction> cStream(StreamsBuilder builder) {
+        JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
+        final Serde<Double> doubleSerde = Serdes.Double();
 
-        JsonSerde transactionJsonSerde = new JsonSerde<>(Transaction.class);
-        JsonSerde enrichedTransactionJsonSerde = new JsonSerde<>(EnrichedTransaction.class);
+        KStream<Long, Transaction> balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
 
-        KStream<Long, Transaction> sourceStream = builder.stream("transactions",
-                Consumed.with(Serdes.Long(), transactionJsonSerde));
-        KStream<Long, EnrichedTransaction> enrichedStream = sourceStream.mapValues(this::enrichTransaction);
+        balanceStream
+                .selectKey((k, v) -> v.getAccountId())
+                .mapValues((k, v) -> v.getDescription().equalsIgnoreCase("DEBIT") ? v.getValue() : (-1) * v.getValue())
+                .groupByKey()
+                // initializer is only called when no record exists for given key
+                .aggregate(
+                        () -> 0.0, (aggKey, newValue, aggValue) -> aggValue + newValue,
+                        Materialized.with(Serdes.Long(), doubleSerde))
+                .toStream().to("balances", Produced.with(Serdes.Long(), doubleSerde));
 
-        enrichedStream.to("enriched_transactions", Produced.with(Serdes.Long(), enrichedTransactionJsonSerde));
-
-        sourceStream.print(Printed.<Long, Transaction>toSysOut().withLabel("Transaction stream"));
-        enrichedStream.print(Printed.<Long, EnrichedTransaction>toSysOut().withLabel("Enriched transaction stream"));
-
-        return sourceStream;
+        return balanceStream;
     }
-
-    private EnrichedTransaction enrichTransaction(Transaction transaction) {
-
-        return new EnrichedTransaction(
-                Long.toString(transaction.getId()),
-                transaction.getDescription().equalsIgnoreCase("DEBIT") ? transaction.getValue() : (-1) * transaction.getValue(),
-                transaction.getDate()
-        );
-    }
-
 }

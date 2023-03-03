@@ -5,6 +5,7 @@ import com.dwarszawski.connector.model.SchemaUpdatedEvent;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaMetadata;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
+import org.apache.kafka.connect.data.Schema;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,23 +54,30 @@ public class SchemaRegistrySourceTask extends org.apache.kafka.connect.source.So
             final Collection<String> allSubjects = client.getAllSubjects();
             for (String subject : allSubjects) {
                 final SchemaMetadata latestSchemaMetadata = client.getLatestSchemaMetadata(subject);
+
+                // current state
                 offsets.forEach((k, v) -> System.out.println(k + ":" + v));
-                System.out.println("Latest schema *********************" + latestSchemaMetadata.getVersion());
                 if (latestSchemaMetadata.getVersion() > (int) offsets.getOrDefault(subject, -1)) {
 
-                    offsets.put(subject, (Object) latestSchemaMetadata.getVersion());
+                    offsets.put(subject, latestSchemaMetadata.getVersion());
 
                     SchemaUpdatedEvent schemaUpdateRequest = SchemaUpdateRequestFactory.newSchemaUpdateEvent(subject, latestSchemaMetadata);
-                    SourceRecordBuilder builder = new SourceRecordBuilder(schemaUpdateRequest, this.topic, this.url)
-                            .withPartition(SCHEMA_REGISTRY_URL, this.url)
-                            .withOffset(offsets);
 
-                    records.add(builder.build());
+                    final SourceRecord sourceRecord = new SourceRecord(
+                            Collections.singletonMap(SCHEMA_REGISTRY_URL, this.url),
+                            offsets,
+                            this.topic,
+                            Schema.STRING_SCHEMA,
+                            subject,
+                            SchemaUpdatedEvent.SCHEMA_UPDATED_EVENT_SCHEMA,
+                            schemaUpdateRequest.toStruct()
+                    );
+
+                    records.add(sourceRecord);
                 }
             }
         } catch (Exception e) {
-            System.out.println("Exception *********************" + e.getMessage());
-            // Exception *********************Invalid Java object for schema with type STRING: class java.lang.Integer for field: "Subject"
+            System.out.println(e.getMessage());
         }
 
         return records;

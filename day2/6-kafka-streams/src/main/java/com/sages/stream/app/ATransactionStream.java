@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonSerde;
 
-// Simple kafka stream app
 @Configuration
 public class ATransactionStream {
 
@@ -23,7 +22,12 @@ public class ATransactionStream {
         KStream<Long, Transaction> transactions = builder.stream("transactions",
                 Consumed.with(Serdes.Long(), transactionSerde));
 
-        KStream<Long, String> outputStream = transactions.mapValues(s -> s.getDescription().toLowerCase());
+        final KStream<Long, Transaction> filteredTransactions = transactions.filter((k, v) ->
+                v.getDescription().equalsIgnoreCase("DEBIT") ||
+                        v.getDescription().equalsIgnoreCase("CREDIT"));
+
+        KStream<Long, String> outputStream = filteredTransactions.mapValues(s -> s.getDescription().toLowerCase());
+
         outputStream.to("transaction_descriptions", Produced.with(Serdes.Long(), Serdes.String()));
 
         // useful for debugging, but don't do this on production

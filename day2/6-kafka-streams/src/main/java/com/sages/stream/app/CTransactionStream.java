@@ -1,38 +1,50 @@
 package com.sages.stream.app;
 
 import com.sages.model.Transaction;
+import com.sages.stream.extractors.RecordTimestampExtractor;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
-import org.apache.kafka.streams.kstream.Consumed;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.Materialized;
-import org.apache.kafka.streams.kstream.Produced;
+import org.apache.kafka.streams.kstream.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.support.serializer.JsonSerde;
 
-// Aggregatoting to balance stream
+import java.time.Duration;
+
 //@Configuration
 public class CTransactionStream {
 
     @Bean
-    public KStream<Long, Transaction> cStream(StreamsBuilder builder) {
-        JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
-        final Serde<Double> doubleSerde = Serdes.Double();
+    public KStream<Long, Transaction> fStream(StreamsBuilder builder) {
 
-        KStream<Long, Transaction> balanceStream = builder.stream("transactions", Consumed.with(Serdes.Long(), transactionSerde));
+        final JsonSerde transactionSerde = new JsonSerde<>(Transaction.class);
+        final Serde<Long> longSerde = Serdes.Long();
 
-        balanceStream
-                .selectKey((k, v) -> v.getAccountId())
-                .mapValues((k, v) -> v.getValue())
-                .groupByKey()
-                // initializer is only called when no record exists for given key
-                .aggregate(
-                        () -> 0.0, (aggKey, newValue, aggValue) -> aggValue + newValue,
-                        Materialized.with(Serdes.Long(), doubleSerde))
-                .toStream().to("balances", Produced.with(Serdes.Long(), doubleSerde));
+        final Duration windowLength = Duration.ofSeconds(15);
+        var hopLength = Duration.ofSeconds(5);
+        final Serde<Windowed<Long>> windowSerde = WindowedSerdes.timeWindowedSerdeFrom(Long.class, windowLength.toMillis());
 
-        return balanceStream;
+        RecordTimestampExtractor timestampExtractor = new RecordTimestampExtractor();
+
+        final KStream<Long, Transaction> transactionStream = builder.stream("transactions",
+                Consumed.with(Serdes.Long(), transactionSerde, timestampExtractor, null));
+
+        final KStream<Windowed<Long>, Long> suspiciousAccounts = transactionStream
+                .groupByKey().windowedBy(TimeWindows.of(windowLength).advanceBy(hopLength))
+                .count()
+                .filter((k, v) -> v > 2)
+                .toStream();
+
+        suspiciousAccounts
+                .to("suspicious_accounts", Produced.with(windowSerde, longSerde));
+
+
+        suspiciousAccounts.print(Printed.<Windowed<Long>, Long>toSysOut().withLabel("fraud detected"));
+
+        builder.build();
+
+        return null;
     }
+
 }
