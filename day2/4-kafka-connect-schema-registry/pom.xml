@@ -9,12 +9,6 @@
     <name>kafka-connect-schema-registry</name>
     <description>A Kafka Connect Source Connector for Confluent Schema Registry</description>
 
-    <repositories>
-        <repository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-    </repositories>
 
     <properties>
         <schema-registry-client-version>7.3.1</schema-registry-client-version>
@@ -73,6 +67,14 @@
             <version>${httpclient.version}</version>
         </dependency>-->
     </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
