@@ -56,7 +56,7 @@ docker run -d --network mynetwork --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=3218
 ```text
 docker build -f ../3-1-setup-server-dockerfile -t kafka-ssl-auth ../
 # -e KAFKA_SECURITY_INTER_BROKER_PROTOCOL=SSL 
-docker run -d --network mynetwork --name=kafkabroker --hostname=kafkabroker -p 9093:9093  --add-host localhost.example.com:${IP_GATEWAY} -e KAFKA_OPTS="-Djavax.net.debug=ssl" -e KAFKA_SSL_CLIENT_AUTH=required -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:32181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafkabroker:9092,SSL://kafkabroker:9093 -e KAFKA_SSL_KEYSTORE_FILENAME=kafka.server.keystore.jks -e KAFKA_SSL_KEYSTORE_CREDENTIALS=keystore-creds -e KAFKA_SSL_KEY_CREDENTIALS=ssl-key-creds -e KAFKA_SSL_TRUSTSTORE_FILENAME=kafka.server.truststore.jks -e KAFKA_SSL_TRUSTSTORE_CREDENTIALS=truststore-creds -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 kafka-ssl-encrypted 
+docker run -d --network mynetwork --name=kafkabroker --hostname=kafkabroker -p 9093:9093 -e KAFKA_OPTS="-Djavax.net.debug=ssl" -e KAFKA_SSL_CLIENT_AUTH=required -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:32181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafkabroker:9092,SSL://kafkabroker:9093 -e KAFKA_SSL_KEYSTORE_FILENAME=kafka.server.keystore.jks -e KAFKA_SSL_KEYSTORE_CREDENTIALS=keystore-creds -e KAFKA_SSL_KEY_CREDENTIALS=ssl-key-creds -e KAFKA_SSL_TRUSTSTORE_FILENAME=kafka.server.truststore.jks -e KAFKA_SSL_TRUSTSTORE_CREDENTIALS=truststore-creds -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 kafka-ssl-encrypted 
 
 docker ps
 
@@ -77,7 +77,7 @@ docker build -f ./3-2-setup-client-dockerfile -t kafka-ssl-client .
 
 ```text
 
-docker run -it  --net=mynetwork --add-host localhost.example.com:${IP_GATEWAY}  kafka-ssl-client /bin/bash
+docker run -it  --net=mynetwork kafka-ssl-client /bin/bash
 kafka-topics --bootstrap-server  kafkabroker:9093  --create --replication-factor 1 --partitions 1 --topic messages  --command-config /tmp/client-ssl.properties
 kafka-console-producer --broker-list kafkabroker:9093 --topic messages --producer.config /tmp/client-ssl.properties
 
