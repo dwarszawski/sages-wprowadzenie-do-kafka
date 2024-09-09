@@ -4,18 +4,18 @@ The prepared source code and scripts should work on any OS assuming that docker 
 
 Following components must be installed:
 
-*   JAVA JDK version >= 11
+*   JAVA JDK version == 17
     
     Verify if `jdk` is available on the path with Bash/Shell or CMD/Powershell:    
     
         $ java -version
         
     Sample output of running command:
-    
-        openjdk version "1.8.0_252"
-        OpenJDK Runtime Environment (build 1.8.0_252-8u252-b09-1ubuntu1-b09)
-        OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
-        
+
+        openjdk 17.0.12 2024-07-16
+        OpenJDK Runtime Environment (build 17.0.12+7-Ubuntu-1ubuntu222.04)
+        OpenJDK 64-Bit Server VM (build 17.0.12+7-Ubuntu-1ubuntu222.04, mixed mode, sharing)
+
     Useful links:
     
     *   https://java.com/en/download/help/download_options.xml
@@ -26,12 +26,12 @@ Following components must be installed:
         $ mvn --version
 
     Sample output of running command:
-    
+
         Apache Maven 3.6.0 (97c98ec64a1fdfee7767ce5ffb20918da4f719f3; 2018-10-24T20:41:47+02:00)
         Maven home: /opt/maven
-        Java version: 1.8.0_252, vendor: Private Build, runtime: /usr/lib/jvm/java-8-openjdk-amd64/jre
+        Java version: 17.0.12, vendor: Ubuntu, runtime: /usr/lib/jvm/java-17-openjdk-amd64
         Default locale: en_US, platform encoding: UTF-8
-        OS name: "linux", version: "5.4.0-33-generic", arch: "amd64", family: "unix"
+        OS name: "linux", version: "5.15.0-102-generic", arch: "amd64", family: "unix"
 
     Useful links:
     
@@ -53,7 +53,7 @@ Following components must be installed:
         -e ZOOKEEPER_CLIENT_PORT=32181 \
         -e ZOOKEEPER_TICK_TIME=2000 \
         -e ZOOKEEPER_SYNC_LIMIT=2 \
-        confluentinc/cp-zookeeper:7.3.2
+        confluentinc/cp-zookeeper:7.4.6
         
     Useful links:
     

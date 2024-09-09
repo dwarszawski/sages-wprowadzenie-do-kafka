@@ -14,14 +14,14 @@
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT \
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* \
     -e SCHEMA_REGISTRY_DEBUG=true \
-    confluentinc/cp-schema-registry:7.3.2
+    confluentinc/cp-schema-registry:7.4.6
 ```
 
 
 * running container on Windows
 
 ```shell 
-docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:7.3.2
+docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:7.4.6
 ```
 
 * REST API available

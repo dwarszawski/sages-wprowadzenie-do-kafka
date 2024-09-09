@@ -3,7 +3,7 @@ kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49
 
 # consume messages from beginning of topic (if no offset is registered)
 # order of messages is not total, order is per partiton
-kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic streams-plaintext-input --from-beginning
+kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic sages --from-beginning
 
 # kafka consumer group - only one consumer from group will receive message
 kafka-consumer-groups --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --list
