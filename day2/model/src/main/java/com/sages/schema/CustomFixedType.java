@@ -5,7 +5,6 @@
  */
 package com.sages.schema;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -16,16 +15,18 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 1650187240349479181L;
+
+
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CustomFixedType\",\"namespace\":\"com.sages.schema\",\"doc\":\"Custom Fixed Type\",\"fields\":[{\"name\":\"md5\",\"type\":{\"type\":\"fixed\",\"name\":\"MD5\",\"size\":32}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
-  private static SpecificData MODEL$ = new SpecificData();
+  private static final SpecificData MODEL$ = new SpecificData();
 
   private static final BinaryMessageEncoder<CustomFixedType> ENCODER =
-      new BinaryMessageEncoder<CustomFixedType>(MODEL$, SCHEMA$);
+      new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
   private static final BinaryMessageDecoder<CustomFixedType> DECODER =
-      new BinaryMessageDecoder<CustomFixedType>(MODEL$, SCHEMA$);
+      new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
@@ -49,7 +50,7 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<CustomFixedType> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<CustomFixedType>(MODEL$, SCHEMA$, resolver);
+    return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
@@ -72,7 +73,7 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
     return DECODER.decode(b);
   }
 
-   private com.sages.schema.MD5 md5;
+  private com.sages.schema.MD5 md5;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -89,9 +90,14 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
     this.md5 = md5;
   }
 
+  @Override
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+
+  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
+
   // Used by DatumWriter.  Applications should not call.
+  @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return md5;
@@ -100,6 +106,7 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
   }
 
   // Used by DatumReader.  Applications should not call.
+  @Override
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
@@ -170,7 +177,7 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
 
     /** Creates a new Builder */
     private Builder() {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
     }
 
     /**
@@ -190,7 +197,7 @@ public class CustomFixedType extends org.apache.avro.specific.SpecificRecordBase
      * @param other The existing instance to copy.
      */
     private Builder(com.sages.schema.CustomFixedType other) {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.md5)) {
         this.md5 = data().deepCopy(fields()[0].schema(), other.md5);
         fieldSetFlags()[0] = true;

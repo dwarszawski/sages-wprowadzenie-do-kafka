@@ -5,7 +5,6 @@
  */
 package com.sages.schema;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -16,16 +15,18 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 6516265351177395218L;
+
+
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BankAccount1\",\"namespace\":\"com.sages.schema\",\"doc\":\"Bank Account (arrays)\",\"fields\":[{\"name\":\"subAccounts\",\"type\":{\"type\":\"array\",\"items\":\"string\"},\"doc\":\"associated sub accounts\"},{\"name\":\"tags\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"string\"}],\"doc\":\"optional tags\",\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
-  private static SpecificData MODEL$ = new SpecificData();
+  private static final SpecificData MODEL$ = new SpecificData();
 
   private static final BinaryMessageEncoder<BankAccount1> ENCODER =
-      new BinaryMessageEncoder<BankAccount1>(MODEL$, SCHEMA$);
+      new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
   private static final BinaryMessageDecoder<BankAccount1> DECODER =
-      new BinaryMessageDecoder<BankAccount1>(MODEL$, SCHEMA$);
+      new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
@@ -49,7 +50,7 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<BankAccount1> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<BankAccount1>(MODEL$, SCHEMA$, resolver);
+    return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
@@ -73,9 +74,9 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
   }
 
   /** associated sub accounts */
-   private java.util.List<java.lang.CharSequence> subAccounts;
+  private java.util.List<java.lang.CharSequence> subAccounts;
   /** optional tags */
-   private java.util.List<java.lang.CharSequence> tags;
+  private java.util.List<java.lang.CharSequence> tags;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -94,9 +95,14 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
     this.tags = tags;
   }
 
+  @Override
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+
+  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
+
   // Used by DatumWriter.  Applications should not call.
+  @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return subAccounts;
@@ -106,6 +112,7 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
   }
 
   // Used by DatumReader.  Applications should not call.
+  @Override
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
@@ -199,7 +206,7 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
 
     /** Creates a new Builder */
     private Builder() {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
     }
 
     /**
@@ -223,7 +230,7 @@ public class BankAccount1 extends org.apache.avro.specific.SpecificRecordBase im
      * @param other The existing instance to copy.
      */
     private Builder(com.sages.schema.BankAccount1 other) {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.subAccounts)) {
         this.subAccounts = data().deepCopy(fields()[0].schema(), other.subAccounts);
         fieldSetFlags()[0] = true;

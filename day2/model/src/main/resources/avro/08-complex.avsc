@@ -14,30 +14,4 @@
       "doc": "country name"
     }
   ]
-},
-{
-  "type": "record",
-  "namespace": "com.sages.schema",
-  "name": "Transaction4",
-  "fields": [
-    {
-      "name": "description1",
-      "type": "string"
-    },
-    {
-      "name": "description2",
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    {
-      "name": "city",
-      "type": "string"
-    },
-    {
-      "name": "country",
-      "type": "com.sages.schema.CountryCode"
-    }
-  ]
 }

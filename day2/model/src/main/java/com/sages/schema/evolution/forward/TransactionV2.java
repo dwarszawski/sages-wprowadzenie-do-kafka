@@ -5,7 +5,6 @@
  */
 package com.sages.schema.evolution.forward;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -15,16 +14,18 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 1475645135963559374L;
+
+
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TransactionV2\",\"namespace\":\"com.sages.schema.evolution.forward\",\"fields\":[{\"name\":\"transactionId\",\"type\":\"long\"},{\"name\":\"transactionValue\",\"type\":\"double\"},{\"name\":\"description\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
-  private static SpecificData MODEL$ = new SpecificData();
+  private static final SpecificData MODEL$ = new SpecificData();
 
   private static final BinaryMessageEncoder<TransactionV2> ENCODER =
-      new BinaryMessageEncoder<TransactionV2>(MODEL$, SCHEMA$);
+      new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
   private static final BinaryMessageDecoder<TransactionV2> DECODER =
-      new BinaryMessageDecoder<TransactionV2>(MODEL$, SCHEMA$);
+      new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
@@ -48,7 +49,7 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<TransactionV2> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<TransactionV2>(MODEL$, SCHEMA$, resolver);
+    return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
@@ -71,9 +72,9 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
     return DECODER.decode(b);
   }
 
-   private long transactionId;
-   private double transactionValue;
-   private java.lang.CharSequence description;
+  private long transactionId;
+  private double transactionValue;
+  private java.lang.CharSequence description;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -94,9 +95,14 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
     this.description = description;
   }
 
+  @Override
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+
+  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
+
   // Used by DatumWriter.  Applications should not call.
+  @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return transactionId;
@@ -107,6 +113,7 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   // Used by DatumReader.  Applications should not call.
+  @Override
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
@@ -215,7 +222,7 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
 
     /** Creates a new Builder */
     private Builder() {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
     }
 
     /**
@@ -243,7 +250,7 @@ public class TransactionV2 extends org.apache.avro.specific.SpecificRecordBase i
      * @param other The existing instance to copy.
      */
     private Builder(com.sages.schema.evolution.forward.TransactionV2 other) {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.transactionId)) {
         this.transactionId = data().deepCopy(fields()[0].schema(), other.transactionId);
         fieldSetFlags()[0] = true;

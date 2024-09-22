@@ -23,6 +23,7 @@ public class CTransactionStream {
 
         final Duration windowLength = Duration.ofSeconds(15);
         var hopLength = Duration.ofSeconds(5);
+        var watermark = Duration.ofHours(1);
         final Serde<Windowed<Long>> windowSerde = WindowedSerdes.timeWindowedSerdeFrom(Long.class, windowLength.toMillis());
 
         RecordTimestampExtractor timestampExtractor = new RecordTimestampExtractor();
@@ -31,7 +32,7 @@ public class CTransactionStream {
                 Consumed.with(Serdes.Long(), transactionSerde, timestampExtractor, null));
 
         final KStream<Windowed<Long>, Long> suspiciousAccounts = transactionStream
-                .groupByKey().windowedBy(TimeWindows.of(windowLength).advanceBy(hopLength))
+                .groupByKey().windowedBy(TimeWindows.ofSizeAndGrace(windowLength, watermark).advanceBy(hopLength))
                 .count()
                 .filter((k, v) -> v > 2)
                 .toStream();

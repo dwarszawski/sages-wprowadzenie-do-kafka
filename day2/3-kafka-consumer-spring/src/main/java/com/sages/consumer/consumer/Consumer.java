@@ -24,7 +24,7 @@ public class Consumer {
     //private ObjectMapper objectMapper
 
     //@KafkaListener(topics = "transactions", containerFactory = "consumerContainerFactory", errorHandler = "customErrorHandler")
-    @KafkaListener(topics = "transactions", containerFactory = "deadLetterContainerFactory", errorHandler = "customErrorHandler")
+    @KafkaListener(topics = "transactions", containerFactory = "deadLetterContainerFactory")
     public void consume(Transaction transaction, Acknowledgment ack) {
         //var object = objectMapper.readValue(message, Transaction.class);
 

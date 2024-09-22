@@ -1,3 +1,6 @@
+# get into one of the kafka containers
+docker exec -it kafka-1 /bin/bash
+
 # produce messages to specified topic
 kafka-console-producer --broker-list kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic sages
 

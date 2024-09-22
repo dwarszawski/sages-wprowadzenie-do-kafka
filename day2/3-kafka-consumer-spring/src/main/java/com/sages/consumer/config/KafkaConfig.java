@@ -53,7 +53,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
 
         factory.setConsumerFactory(consumerFactory());
-        factory.setErrorHandler(new GlobalErrorHandler());
+        factory.setCommonErrorHandler(new GlobalErrorHandler());
         factory.setConcurrency(3);
         factory.getContainerProperties().setPollTimeout(3000);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
@@ -70,46 +70,6 @@ public class KafkaConfig {
 
         return factory;
     }
-
-    // handling transient errors
-    // retry mechanism before global error handler is invoked
-    // Exponential Backoff to the Rescue
-    // keep retyring until succeeded or retry count exceed
-    //The idea behind using exponential backoff with retry is that instead of retrying after waiting for a fixed amount of time, we increase the waiting time between reties after each retry failure.
-    @Bean(value = "retryContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<Long, Transaction> retryContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction>();
-
-        factory.setConsumerFactory(consumerFactory());
-        factory.setErrorHandler(new GlobalErrorHandler());
-        factory.setConcurrency(3);
-        factory.getContainerProperties().setPollTimeout(3000);
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
-
-        RetryTemplate retryTemplate = new RetryTemplate();
-
-        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(3);
-        retryTemplate.setRetryPolicy(retryPolicy);
-
-
-        FixedBackOffPolicy backoffPolicy = new FixedBackOffPolicy();
-        backoffPolicy.setBackOffPeriod(10000);
-        retryTemplate.setBackOffPolicy(backoffPolicy);
-
-        factory.setRetryTemplate(retryTemplate);
-        factory.setRecoveryCallback(new RecoveryCallback<Object>() {
-
-            @Override
-            public Object recover(RetryContext context) throws Exception {
-                System.out.println("Recovery callback " + context.getRetryCount());
-                return null;
-            }
-        });
-
-
-        return factory;
-    }
-
 
     // keep failing due to non-technical issue e.g. wrong data
     // permanent technical error - endpoint changed

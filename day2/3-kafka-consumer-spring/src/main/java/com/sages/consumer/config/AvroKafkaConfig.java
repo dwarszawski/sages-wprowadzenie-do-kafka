@@ -42,7 +42,7 @@ public class AvroKafkaConfig {
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory<Long, Transaction1>();
 
         factory.setConsumerFactory(consumerFactory());
-        factory.setErrorHandler(new GlobalErrorHandler());
+        factory.setCommonErrorHandler(new GlobalErrorHandler());
         factory.setConcurrency(3);
         factory.getContainerProperties().setPollTimeout(3000);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);

@@ -9,5 +9,7 @@ public enum TransactionType implements org.apache.avro.generic.GenericEnumSymbol
   CREDIT, DEBIT, UNKNOWN  ;
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"TransactionType\",\"namespace\":\"com.sages.schema\",\"symbols\":[\"CREDIT\",\"DEBIT\",\"UNKNOWN\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
+
+  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
 }

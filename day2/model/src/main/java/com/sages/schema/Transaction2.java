@@ -5,7 +5,6 @@
  */
 package com.sages.schema;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -16,22 +15,25 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class Transaction2 extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 7151926863176919945L;
+
+
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transaction2\",\"namespace\":\"com.sages.schema\",\"doc\":\"Bank Transaction (logical types)\",\"fields\":[{\"name\":\"transactionId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"transactionDate\",\"type\":{\"type\":\"int\",\"logicalType\":\"date\"}},{\"name\":\"transactionDateTime\",\"type\":{\"type\":\"int\",\"logicalType\":\"time-millis\"}},{\"name\":\"transactionTimeStamp\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}},{\"name\":\"amount\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":20,\"scale\":5}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
-  private static SpecificData MODEL$ = new SpecificData();
-static {
+  private static final SpecificData MODEL$ = new SpecificData();
+  static {
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.DateConversion());
+    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimeMillisConversion());
   }
 
   private static final BinaryMessageEncoder<Transaction2> ENCODER =
-      new BinaryMessageEncoder<Transaction2>(MODEL$, SCHEMA$);
+      new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
   private static final BinaryMessageDecoder<Transaction2> DECODER =
-      new BinaryMessageDecoder<Transaction2>(MODEL$, SCHEMA$);
+      new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
@@ -55,7 +57,7 @@ static {
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
   public static BinaryMessageDecoder<Transaction2> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<Transaction2>(MODEL$, SCHEMA$, resolver);
+    return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
@@ -78,11 +80,11 @@ static {
     return DECODER.decode(b);
   }
 
-   private java.lang.CharSequence transactionId;
-   private java.time.LocalDate transactionDate;
-   private java.time.LocalTime transactionDateTime;
-   private java.time.Instant transactionTimeStamp;
-   private java.nio.ByteBuffer amount;
+  private java.util.UUID transactionId;
+  private java.time.LocalDate transactionDate;
+  private java.time.LocalTime transactionDateTime;
+  private java.time.Instant transactionTimeStamp;
+  private java.nio.ByteBuffer amount;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -99,7 +101,7 @@ static {
    * @param transactionTimeStamp The new value for transactionTimeStamp
    * @param amount The new value for amount
    */
-  public Transaction2(java.lang.CharSequence transactionId, java.time.LocalDate transactionDate, java.time.LocalTime transactionDateTime, java.time.Instant transactionTimeStamp, java.nio.ByteBuffer amount) {
+  public Transaction2(java.util.UUID transactionId, java.time.LocalDate transactionDate, java.time.LocalTime transactionDateTime, java.time.Instant transactionTimeStamp, java.nio.ByteBuffer amount) {
     this.transactionId = transactionId;
     this.transactionDate = transactionDate;
     this.transactionDateTime = transactionDateTime.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
@@ -107,9 +109,14 @@ static {
     this.amount = amount;
   }
 
+  @Override
   public org.apache.avro.specific.SpecificData getSpecificData() { return MODEL$; }
+
+  @Override
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
+
   // Used by DatumWriter.  Applications should not call.
+  @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return transactionId;
@@ -123,7 +130,7 @@ static {
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
-      null,
+      new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.data.TimeConversions.DateConversion(),
       new org.apache.avro.data.TimeConversions.TimeMillisConversion(),
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
@@ -137,10 +144,11 @@ static {
   }
 
   // Used by DatumReader.  Applications should not call.
+  @Override
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: transactionId = (java.lang.CharSequence)value$; break;
+    case 0: transactionId = (java.util.UUID)value$; break;
     case 1: transactionDate = (java.time.LocalDate)value$; break;
     case 2: transactionDateTime = (java.time.LocalTime)value$; break;
     case 3: transactionTimeStamp = (java.time.Instant)value$; break;
@@ -153,7 +161,7 @@ static {
    * Gets the value of the 'transactionId' field.
    * @return The value of the 'transactionId' field.
    */
-  public java.lang.CharSequence getTransactionId() {
+  public java.util.UUID getTransactionId() {
     return transactionId;
   }
 
@@ -162,7 +170,7 @@ static {
    * Sets the value of the 'transactionId' field.
    * @param value the value to set.
    */
-  public void setTransactionId(java.lang.CharSequence value) {
+  public void setTransactionId(java.util.UUID value) {
     this.transactionId = value;
   }
 
@@ -275,7 +283,7 @@ static {
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Transaction2>
     implements org.apache.avro.data.RecordBuilder<Transaction2> {
 
-    private java.lang.CharSequence transactionId;
+    private java.util.UUID transactionId;
     private java.time.LocalDate transactionDate;
     private java.time.LocalTime transactionDateTime;
     private java.time.Instant transactionTimeStamp;
@@ -283,7 +291,7 @@ static {
 
     /** Creates a new Builder */
     private Builder() {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
     }
 
     /**
@@ -319,7 +327,7 @@ static {
      * @param other The existing instance to copy.
      */
     private Builder(com.sages.schema.Transaction2 other) {
-      super(SCHEMA$);
+      super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.transactionId)) {
         this.transactionId = data().deepCopy(fields()[0].schema(), other.transactionId);
         fieldSetFlags()[0] = true;
@@ -346,7 +354,7 @@ static {
       * Gets the value of the 'transactionId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getTransactionId() {
+    public java.util.UUID getTransactionId() {
       return transactionId;
     }
 
@@ -356,7 +364,7 @@ static {
       * @param value The value of 'transactionId'.
       * @return This builder.
       */
-    public com.sages.schema.Transaction2.Builder setTransactionId(java.lang.CharSequence value) {
+    public com.sages.schema.Transaction2.Builder setTransactionId(java.util.UUID value) {
       validate(fields()[0], value);
       this.transactionId = value;
       fieldSetFlags()[0] = true;
@@ -544,7 +552,7 @@ static {
     public Transaction2 build() {
       try {
         Transaction2 record = new Transaction2();
-        record.transactionId = fieldSetFlags()[0] ? this.transactionId : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.transactionId = fieldSetFlags()[0] ? this.transactionId : (java.util.UUID) defaultValue(fields()[0]);
         record.transactionDate = fieldSetFlags()[1] ? this.transactionDate : (java.time.LocalDate) defaultValue(fields()[1]);
         record.transactionDateTime = fieldSetFlags()[2] ? this.transactionDateTime : (java.time.LocalTime) defaultValue(fields()[2]);
         record.transactionTimeStamp = fieldSetFlags()[3] ? this.transactionTimeStamp : (java.time.Instant) defaultValue(fields()[3]);
