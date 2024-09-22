@@ -41,7 +41,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
     -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" \
     -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars \
     -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars \
-    confluentinc/cp-kafka-connect:7.4.6
+    confluentinc/cp-kafka-connect:7.7.1
     #-v ${PWD}/target:/etc/kafka-connect/jars \
     #-v ${pwd}/target:/etc/kafka-connect/jars  for windows
     
@@ -49,26 +49,7 @@ Kafka Connect requires Apache Kafka and Apache Zookeeper servers.
 * running container on Windows
 ```shell
 
-    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=kafka-1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:7.4.6
-
-```
-
-
-### Setting up Kafka Connect UI container on Linux
-```shell 
-    docker run -d \
-    --name=kafka-connect-ui \
-    -p 8000:8000 \
-    --network mynetwork \
-    -e CONNECT_URL="http://172.17.0.1:8083" \
-    landoop/kafka-connect-ui
-```
-
-### Setting up Kafka Connect UI container on Windows
-
-```shell 
-
-docker run -d --name=kafka-connect-ui  -p 8000:8000 --network mynetwork -e CONNECT_URL="http://{gateway-address}:8083" landoop/kafka-connect-ui
+    docker run -d --name=kafka-connect  -p 8083:8083 --network mynetwork -e CONNECT_BOOTSTRAP_SERVERS=kafka-1:29092 -e CONNECT_REST_PORT=8083 -e CONNECT_GROUP_ID="connectors" -e CONNECT_CONFIG_STORAGE_TOPIC="connectors-config" -e CONNECT_OFFSET_STORAGE_TOPIC="connectors-offsets" -e CONNECT_STATUS_STORAGE_TOPIC="connectors-status" -e CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=3 -e CONNECT_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_KEY_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_INTERNAL_VALUE_CONVERTER="org.apache.kafka.connect.json.JsonConverter" -e CONNECT_REST_ADVERTISED_HOST_NAME="kafka-connect" -e CONNECT_PLUGIN_PATH=/usr/share/java,/etc/kafka-connect/jars -v /home/dwarszawski/Workspace/personal/sages/kafka-kurs/day2/4-kafka-connect-schema-registry/target:/etc/kafka-connect/jars confluentinc/cp-kafka-connect:7.7.1
 
 ```
 
@@ -81,25 +62,27 @@ kafka-topics --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --part
 
 ```
 
-### Create instance of connect using Kafka Connect UI
+### Connect to Schema Registry using Kafka UI
 
-Kafka Connect UI is available [here](http://172.17.0.1:8000/)
+* Go to `locahost:8080`
+* From `Dashboard` tab select 'configure' on existing `sages` cluster
+* Select `Configure Kafka Connect`
+* Set `URL` to `http://kafka-connect:8083`
+* Click `Validate`
+* Click `Submit`
+* Click `Create Connector` with Name `SchemaRegistrySourceConnector` and Config as json below:
 
-```text
-    name=SchemaRegistrySourceConnector
-    connector.class=com.dwarszawski.connector.SchemaRegistrySourceConnector
-    tasks.max=1
-    topic=schema.updates
-    schema_registry_url=http://schema-registry:8081
+```json
+{
+  "name": "SchemaRegistrySourceConnector",
+  "connector.class": "com.dwarszawski.connector.SchemaRegistrySourceConnector",
+  "tasks.max": "1",
+  "topic": "schema.updates",
+  "schema_registry_url": "http://schema-registry:8081"
+}
 ```
 
-Check logs of schema registry
-
-```text
-docker logs -f schema-registry
-```
-
-### Create new schema version using Schema Registry UI
+### Trigger connector to process schema update
 
 * Run console consumer consumer from on of kafka containers
 
@@ -107,4 +90,4 @@ docker logs -f schema-registry
     kafka-console-consumer --bootstrap-server localhost:29092 --topic schema.updates
 ```
 
-* Create new schema/update existing schema. Schema Registry UI is available [here](http://localhost:8084/#/)
+* Create new schema/update existing schema using Kafka UI

@@ -53,7 +53,7 @@ Following components must be installed:
         -e ZOOKEEPER_CLIENT_PORT=32181 \
         -e ZOOKEEPER_TICK_TIME=2000 \
         -e ZOOKEEPER_SYNC_LIMIT=2 \
-        confluentinc/cp-zookeeper:7.4.6
+        confluentinc/cp-zookeeper:7.7.1
         
     Useful links:
     

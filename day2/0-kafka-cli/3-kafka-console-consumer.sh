@@ -1,3 +1,6 @@
+# get into one of the kafka containers
+docker exec -it kafka-1 /bin/bash
+
 # consume messages from topic
 kafka-console-consumer --bootstrap-server kafka-1:29092,kafka-2:39092,kafka-3:49092 --topic sages
 

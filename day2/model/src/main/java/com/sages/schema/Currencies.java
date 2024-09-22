@@ -5,7 +5,6 @@
  */
 package com.sages.schema;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -415,7 +414,7 @@ public class Currencies extends org.apache.avro.specific.SpecificRecordBase impl
       long size0 = in.readMapStart();
       java.util.Map<java.lang.CharSequence,java.lang.CharSequence> m0 = this.currencies; // Need fresh name due to limitation of macro system
       if (m0 == null) {
-        m0 = new java.util.HashMap<java.lang.CharSequence,java.lang.CharSequence>((int)size0);
+        m0 = new java.util.HashMap<java.lang.CharSequence,java.lang.CharSequence>((int)(size0 * 4)/3 + 1);
         this.currencies = m0;
       } else m0.clear();
       for ( ; 0 < size0; size0 = in.mapNext()) {
@@ -435,7 +434,7 @@ public class Currencies extends org.apache.avro.specific.SpecificRecordBase impl
         long size1 = in.readMapStart();
         java.util.Map<java.lang.CharSequence,java.lang.Integer> m1 = this.swiftCodes; // Need fresh name due to limitation of macro system
         if (m1 == null) {
-          m1 = new java.util.HashMap<java.lang.CharSequence,java.lang.Integer>((int)size1);
+          m1 = new java.util.HashMap<java.lang.CharSequence,java.lang.Integer>((int)(size1 * 4)/3 + 1);
           this.swiftCodes = m1;
         } else m1.clear();
         for ( ; 0 < size1; size1 = in.mapNext()) {
@@ -456,7 +455,7 @@ public class Currencies extends org.apache.avro.specific.SpecificRecordBase impl
           long size0 = in.readMapStart();
           java.util.Map<java.lang.CharSequence,java.lang.CharSequence> m0 = this.currencies; // Need fresh name due to limitation of macro system
           if (m0 == null) {
-            m0 = new java.util.HashMap<java.lang.CharSequence,java.lang.CharSequence>((int)size0);
+            m0 = new java.util.HashMap<java.lang.CharSequence,java.lang.CharSequence>((int)(size0 * 4)/3 + 1);
             this.currencies = m0;
           } else m0.clear();
           for ( ; 0 < size0; size0 = in.mapNext()) {
@@ -478,7 +477,7 @@ public class Currencies extends org.apache.avro.specific.SpecificRecordBase impl
             long size1 = in.readMapStart();
             java.util.Map<java.lang.CharSequence,java.lang.Integer> m1 = this.swiftCodes; // Need fresh name due to limitation of macro system
             if (m1 == null) {
-              m1 = new java.util.HashMap<java.lang.CharSequence,java.lang.Integer>((int)size1);
+              m1 = new java.util.HashMap<java.lang.CharSequence,java.lang.Integer>((int)(size1 * 4)/3 + 1);
               this.swiftCodes = m1;
             } else m1.clear();
             for ( ; 0 < size1; size1 = in.mapNext()) {

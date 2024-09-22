@@ -14,14 +14,14 @@
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT \
     -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* \
     -e SCHEMA_REGISTRY_DEBUG=true \
-    confluentinc/cp-schema-registry:7.4.6
+    confluentinc/cp-schema-registry:7.7.1
 ```
 
 
 * running container on Windows
 
 ```shell 
-docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:7.4.6
+docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka-1:29092 -e SCHEMA_REGISTRY_HOST_NAME=schema-registry -e SCHEMA_REGISTRY_LISTENERS=http://schema-registry:8081 -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,OPTIONS,PUT -e SCHEMA_REGISTRY_ACCESS_CONTROL_ALLOW_ORIGIN=* -e SCHEMA_REGISTRY_DEBUG=true confluentinc/cp-schema-registry:7.7.1
 ```
 
 * REST API available
@@ -31,31 +31,37 @@ docker run -d -p 8081:8081 --network mynetwork --name=schema-registry -e SCHEMA_
     http://localhost:8081/schemas/subjects/
 
 
-### Setting up Schema Registry UI container
+### Connect to Schema Registry using Kafka UI
 
-* running container on Linux
+* Go to `locahost:8080`
+* From `Dashboard` tab select 'configure' on existing `sages` cluster
+* Select `Configure Schema Registry`
+* Set `URL` to `http://schema-registry:8081`
+* Click `Validate`
+* Click `Submit`
 
-```shell 
-    docker run -d \
-    -p 8084:8000 \
-    --network mynetwork \
-    --name=schema-registry-ui \
-    -e "SCHEMAREGISTRY_URL=http://localhost:8081" \
-    landoop/schema-registry-ui
+### Create new schema version using Kafka UI
+
+* Go to `locahost:8080`
+* Expand `sages` cluster menu
+* Select `Schema Registry`
+* Click `Create Schema` with Subject `test-value` and Schema Type `Avro` and Schema as json below
+
+```json
+{
+  "type": "record",
+  "namespace": "com.sages.schema.evolution.backward",
+  "name": "TransactionV1",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "long"
+    },
+    {
+      "name": "transactionValue",
+      "type": "double"
+    }
+  ]
+}
+
 ```
-
-* running container on Windows
-
-```shell 
-    docker run -d -p 8084:8000 --network mynetwork --name=schema-registry-ui -e "SCHEMAREGISTRY_URL=http://localhost:8081" landoop/schema-registry-ui
-```
-
-### Create new schema version using Schema Registry UI
-
-* Create new schema/update existing schema. Schema Registry UI is available [here](http://{gateway-address}:8084/#/)
-
-* REST API
-
-    http://{gateway-address}:8084/subjects
-
-    http://{gateway-address}:8084/schemas/ids/1
